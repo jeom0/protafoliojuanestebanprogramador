@@ -12,7 +12,7 @@ import { projects } from '../data/projects';
       
       <!-- Giant Background Title (changes per project) -->
       <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none z-0 select-none">
-        <h2 id="work-bg-title" class="font-heading uppercase text-black leading-[0.8] tracking-tighter whitespace-nowrap"
+        <h2 id="work-bg-title" class="font-heading uppercase text-black leading-[1.1] md:leading-[0.8] tracking-tight md:tracking-tighter whitespace-nowrap"
           style="font-size: clamp(80px, 20vw, 240px); opacity: 0.06; transform: translateX(0);">
           {projects[0].title}
         </h2>
@@ -103,8 +103,8 @@ import { projects } from '../data/projects';
               </div>
               <div class="p-8 md:p-14 flex flex-col md:flex-row gap-8 md:gap-12 bg-[#F2F2F2]">
                 <div class="md:w-2/3">
-                  <h3 class="font-heading text-5xl md:text-7xl font-black text-black uppercase tracking-tighter leading-[0.85] mb-6">{project.title}</h3>
-                  <p class="font-sans text-base md:text-lg text-black/70 font-medium leading-relaxed mb-6">{project.summary}</p>
+                  <h3 class="font-heading text-5xl md:text-7xl font-black text-black uppercase tracking-tight md:tracking-tighter leading-[1.1] md:leading-[0.85] mb-4 md:mb-6">{project.title}</h3>
+                  <p class="font-sans text-base md:text-lg text-black/70 font-medium leading-relaxed mb-4 md:mb-6">{project.summary}</p>
                   <ul class="space-y-2 mb-8">
                     {project.impactBullets.map(b => (
                       <li class="flex items-start gap-3 text-sm font-medium text-black/60 font-sans">
