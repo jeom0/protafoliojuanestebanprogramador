@@ -160,9 +160,29 @@
             appendMessage(botReply, false);
 
         } catch (error) {
-            console.error('Error communicating with n8n:', error);
+            console.error('N8n interaction failed or not configured. Using intelligent native fallback:', error);
             typingIndicator.remove();
-            appendMessage("Lo siento, no pude conectar con el servidor n8n en este momento. Revisa la consola o configuración CORS.", false);
+            
+            // Intelligent Fallback Logic (Mock AI)
+            const inputLower = text.toLowerCase();
+            let mockReply = '';
+            
+            if(inputLower.includes('precio') || inputLower.includes('cotiza') || inputLower.includes('costo') || inputLower.includes('cuanto')) {
+                mockReply = '¡Claro! Los proyectos de arquitectura backend o desarrollo full-stack varían según el alcance. Por favor escríbeme a juanospina@example.com o usa el botón de WhatsApp al final de la página para darte un presupuesto exacto.';
+            } else if (inputLower.includes('tecnologia') || inputLower.includes('stack') || inputLower.includes('sabe') || inputLower.includes('experiencia')) {
+                mockReply = 'Soy experto en construir arquitecturas escalables usando Node.js, Python, bases de datos SQL/NoSQL, y despliegues en AWS y Docker. Además, creo automatizaciones muy avanzadas en n8n.';
+            } else if (inputLower.includes('hola') || inputLower.includes('buenos') || inputLower.includes('buenas') || inputLower.includes('saludos')) {
+                mockReply = '¡Hola de nuevo! ¿En qué puedo ayudarte hoy? ¿Te gustaría ver los proyectos o saber más sobre mis tecnologías base?';
+            } else if (inputLower.includes('contacto') || inputLower.includes('hablar') || inputLower.includes('whatsapp') || inputLower.includes('correo')) {
+                mockReply = 'Puedes contactar directamente a Juan Esteban deslizando hasta el pie de página. Allí encontrarás el botón directo a mi WhatsApp personal y mi correo electrónico.';
+            } else {
+                mockReply = 'Entiendo. Como el asistente virtual A.I. de Juan Esteban, te recomiendo contactarle directamente vía correo o WhatsApp (abajo de la página) para hablar más a fondo sobre tu solicitud. ¡Estará encantado de ayudarte!';
+            }
+
+            // Simulate slight AI thinking delay
+            setTimeout(() => {
+                appendMessage(mockReply, false);
+            }, 600);
         }
     });
 

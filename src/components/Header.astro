@@ -53,15 +53,15 @@ import { siteData } from '../data/site';
     </a>
 
     <!-- Mobile Menu Toggle -->
-    <button id="menu-toggle" class="md:hidden relative z-[110] w-10 h-10 flex flex-col justify-center items-end gap-1.5 focus:outline-none group">
-        <span class="w-8 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:rotate-45 group-[.is-active]:translate-y-2 group-[.is-active]:w-6"></span>
+    <button id="menu-toggle" class="md:hidden relative z-[150] w-10 h-10 flex flex-col justify-center items-end gap-1.5 focus:outline-none group">
+        <span class="w-8 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:rotate-45 group-[.is-active]:translate-y-2 group-[.is-active]:w-8"></span>
         <span class="w-6 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:opacity-0"></span>
-        <span class="w-4 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:-rotate-45 group-[.is-active]:-translate-y-2 group-[.is-active]:w-6 group-[.is-active]:bg-[#0066ff]"></span>
+        <span class="w-4 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:-rotate-45 group-[.is-active]:-translate-y-2 group-[.is-active]:w-8 group-[.is-active]:bg-[#0066ff]"></span>
     </button>
   </nav>
 
   <!-- Mobile Menu Drawer (Solid Light) -->
-  <div id="mobile-menu" class="fixed inset-0 z-[105] -translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-8 md:hidden bg-[#F2F2F2]">
+  <div id="mobile-menu" class="fixed inset-0 z-[140] -translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-6 md:hidden bg-[#F2F2F2] isolate h-[100dvh] w-full px-4">
     
     {[
         { name: 'INDEX', href: '#inicio' },
@@ -71,14 +71,14 @@ import { siteData } from '../data/site';
       ].map((item, index) => (
         <a 
           href={item.href} 
-          class="mobile-link font-heading text-6xl uppercase tracking-tighter font-black text-black hover:text-[#0066ff] transition-colors"
+          class="mobile-link font-heading text-4xl sm:text-5xl uppercase tracking-tighter font-black text-black hover:text-[#0066ff] transition-colors"
           style={`transition-delay: ${index * 50}ms`}
         >
           {item.name}
         </a>
       ))}
       
-      <a href="#contacto" class="mobile-link mt-10 px-12 py-5 bg-black text-white font-sans text-sm rounded-full uppercase tracking-widest font-bold active:scale-95 transition-all">
+      <a href="#contacto" class="mobile-link mt-8 px-10 py-4 bg-black text-white font-sans text-xs rounded-full uppercase tracking-widest font-bold active:scale-95 transition-all outline-none">
         HIRE ME
       </a>
   </div>

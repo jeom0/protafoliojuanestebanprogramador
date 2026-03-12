@@ -2,13 +2,16 @@
 import { siteData } from '../data/site';
 ---
 
-<section id="inicio" class="relative min-h-[90vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 md:px-8">
+<section id="inicio" class="relative min-h-[90vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 md:px-8 overflow-hidden">
     
+    <!-- Interactive Canvas Particles -->
+    <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
     <!-- Massive Centered Typography -->
     <div class="w-full max-w-7xl mx-auto text-center relative z-10 flex flex-col items-center">
         
         <!-- Overhead Intro -->
-        <div class="mb-8 inline-flex items-center gap-3 px-6 py-2 rounded-full border border-black/10 bg-white/50 backdrop-blur-sm">
+        <div class="mb-8 inline-flex items-center gap-3 px-6 py-2 rounded-full border border-black/10 bg-white/50 backdrop-blur-sm shadow-sm">
             <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span class="font-sans text-xs uppercase tracking-widest font-bold text-black/70">JUAN ESTEBAN OSPINA</span>
         </div>
@@ -103,5 +106,103 @@ import { siteData } from '../data/site';
             duration: 1,
             ease: 'power3.out'
         }, "-=0.8");
+
+        // Interactive Canvas Particles Logic
+        const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
+        if(canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles: Particle[] = [];
+            
+            const resize = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            };
+            window.addEventListener('resize', resize);
+            resize();
+
+            let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY + window.scrollY; // adjust for scroll if needed
+            });
+
+            class Particle {
+                x: number;
+                y: number;
+                size: number;
+                baseX: number;
+                baseY: number;
+                density: number;
+                color: string;
+
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.density = (Math.random() * 30) + 1;
+                    this.size = Math.random() * 2 + 1;
+                    this.color = Math.random() > 0.5 ? 'rgba(0, 102, 255, 0.4)' : 'rgba(0, 0, 0, 0.2)';
+                }
+
+                draw() {
+                    if(!ctx) return;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                update() {
+                    // Adjust mouse position relative to scroll
+                    const bounds = canvas.getBoundingClientRect();
+                    const localMouseY = mouse.y - bounds.top;
+
+                    let dx = mouse.x - this.x;
+                    let dy = localMouseY - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = 150;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+
+                    if (distance < maxDistance) {
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    } else {
+                        if (this.x !== this.baseX) {
+                            let dx = this.x - this.baseX;
+                            this.x -= dx / 10;
+                        }
+                        if (this.y !== this.baseY) {
+                            let dy = this.y - this.baseY;
+                            this.y -= dy / 10;
+                        }
+                    }
+                }
+            }
+
+            const init = () => {
+                particles = [];
+                for (let i = 0; i < 150; i++) {
+                    particles.push(new Particle());
+                }
+            };
+
+            const animate = () => {
+                ctx?.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].draw();
+                    particles[i].update();
+                }
+                requestAnimationFrame(animate);
+            };
+
+            init();
+            animate();
+        }
     });
 </script>
