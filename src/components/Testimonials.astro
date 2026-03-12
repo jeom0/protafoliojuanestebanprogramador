@@ -43,7 +43,7 @@ const testimonials = [
 ];
 ---
 
-<section id="testimonios-wrapper" class="relative w-full bg-[#f8fafc] overflow-hidden py-40">
+<section id="testimonios-wrapper" class="relative w-full bg-[#f8fafc] overflow-hidden py-24 min-h-screen flex flex-col justify-center">
 
 <!-- Background Text -->
 <div class="absolute inset-x-0 top-[10%] flex justify-center opacity-[0.06] pointer-events-none select-none">
@@ -128,16 +128,14 @@ opacity: i === 0 ? 1 : 0.35
 
 // timeline
 const tl = gsap.timeline({
-
 scrollTrigger: {
 trigger: "#testimonios-wrapper",
-start: "top center",
-end: `+=${cards.length * 220}`,
-scrub: true,
-pin: "#testimonios-pin",
+start: "center center",
+end: `+=${cards.length * 300}`,
+scrub: 1,
+pin: true,
 anticipatePin: 1
 }
-
 });
 
 // animación
