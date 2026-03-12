@@ -75,9 +75,6 @@ import { projects } from '../data/projects';
       </div>
 
     </div>
-
-    <!-- Scroll Trigger Space -->
-    <div id="work-scroll-space" class="w-full" style={`height: ${(projects.length) * 110}vh;`}></div>
   </div>
 
   <!-- ==================== PROJECT MODALS ==================== -->
@@ -166,7 +163,6 @@ import { projects } from '../data/projects';
     if (projectsData.length === 0) return;
 
     const pinContainer = document.getElementById('work-pinned-container');
-    const scrollSpace   = document.getElementById('work-scroll-space');
     const bgTitle       = document.getElementById('work-bg-title');
     const cardStack     = document.getElementById('work-card-stack');
     const cards         = document.querySelectorAll('.project-card');
@@ -201,7 +197,7 @@ import { projects } from '../data/projects';
     });
 
     // ---- GSAP Scroll Flip ----
-    if (!pinContainer || !scrollSpace || cards.length === 0) return;
+    if (!pinContainer || cards.length === 0) return;
 
     // Tracker for current active card
     let currentCard = 0;
@@ -225,7 +221,7 @@ import { projects } from '../data/projects';
       scrollTrigger: {
         trigger: '#proyectos',
         start: 'top top',
-        end: () => `+=${(cards.length - 1) * 60}vh`,
+        end: () => `+=${(cards.length - 1) * 40}vh`,
         scrub: 1,
         pin: pinContainer,
         anticipatePin: 1,
