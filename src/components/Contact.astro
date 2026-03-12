@@ -5,7 +5,7 @@
   <div class="container mx-auto px-4 w-full">
     
     <!-- Stadium Footer Card -->
-    <div class="stadium-pill bg-black w-full pt-32 pb-16 px-8 md:px-16 flex flex-col items-center justify-between min-h-[85vh] relative overflow-hidden text-center shadow-2xl">
+    <div data-gsap="footer-pill" class="stadium-pill bg-black w-full pt-32 pb-16 px-8 md:px-16 flex flex-col items-center justify-between min-h-[85vh] relative text-center shadow-2xl" style="transform-origin: center bottom; will-change: transform;">
         
         <!-- Animated Background Glow -->
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-[#0066ff]/20 to-transparent opacity-40"></div>
@@ -19,7 +19,7 @@
             
             <!-- Massive Footer Headline -->
             <a href="mailto:juanospina@example.com" class="group relative z-10 inline-block overflow-hidden">
-                <h2 class="font-heading text-[12vw] sm:text-[14vw] md:text-[12vw] uppercase font-black text-white tracking-tighter leading-[0.85] w-full text-center transition-transform duration-500 group-hover:scale-105 group-hover:text-[#0066ff] mix-blend-screen">
+                <h2 data-gsap="footer-title" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);" class="font-heading text-[12vw] sm:text-[14vw] md:text-[12vw] uppercase font-black text-white tracking-tighter leading-[0.85] w-full text-center transition-transform duration-500 group-hover:scale-105 group-hover:text-[#0066ff] mix-blend-screen opacity-0">
                     TRABAJEMOS <br/>
                     <i class="opacity-40 group-hover:opacity-100 transition-opacity">JUNTOS.</i>
                 </h2>
@@ -33,12 +33,12 @@
 
             <!-- Quick Action Buttons -->
             <div class="mt-16 flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <a href="mailto:juanospina@example.com" class="px-10 py-5 bg-white text-black font-sans text-sm uppercase font-bold tracking-widest rounded-full hover:bg-black hover:text-white border border-transparent hover:border-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-none">
+                <a href="mailto:juanospina@example.com" class="magnetic-btn px-10 py-5 bg-white text-black font-sans text-sm uppercase font-bold tracking-widest rounded-full hover:bg-black hover:text-white border border-transparent hover:border-white/20 transition-all duration-300 transform shadow-[0_10px_30px_rgba(255,255,255,0.2)] hover:shadow-none">
                     ENVIAR CORREO
                 </a>
                 
                 <!-- Specialized WhatsApp Button -->
-                <button type="button" id="btn-whatsapp-footer" class="px-10 py-5 bg-[#25D366] text-black font-sans text-sm uppercase font-bold tracking-widest rounded-full hover:bg-[#128C7E] hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-[0_10px_30px_rgba(37,211,102,0.3)] flex items-center gap-3">
+                <button type="button" id="btn-whatsapp-footer" class="magnetic-btn px-10 py-5 bg-[#25D366] text-black font-sans text-sm uppercase font-bold tracking-widest rounded-full hover:bg-[#128C7E] hover:text-white transition-all duration-300 transform shadow-[0_10px_30px_rgba(37,211,102,0.3)] flex items-center gap-3">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.993 0C5.367 0 0 5.366 0 11.995c0 2.65.86 5.105 2.308 7.15L.892 24l5.006-1.314c1.954 1.258 4.29 1.986 6.784 1.986C19.317 24 24 18.634 24 12c0-6.63-5.366-12-12.007-12zm6.657 17.185c-.279.789-1.545 1.517-2.128 1.579-.536.056-1.228.096-3.411-.806-2.774-1.144-4.551-4.008-4.691-4.194-.14-.186-1.121-1.492-1.121-2.844 0-1.352.704-2.016.953-2.28.249-.264.544-.33.722-.33.179 0 .358.008.514.016.163.008.381-.062.599.467.225.544 1.057 2.58.1149 2.766.093.187-.031.296-.124.436-.093.14-.194.303-.279.389-.093.093-.194.194-.085.381.109.187.482.793 1.034 1.284.711.63 1.306.824 1.492.918.187.093.296.078.405-.031.109-.109.474-.552.599-.739.124-.187.249-.156.419-.093.171.062 1.081.513 1.267.607.187.093.311.14.358.218.047.078.047.451-.233 1.24z"/></svg>
                     WHATSAPP DIRECTO
                 </button>
@@ -73,4 +73,69 @@
           });
       }
   });
+</script>
+
+<style is:global>
+    [data-gsap="footer-title"] .word {
+        transform: translateY(110%);
+        opacity: 0;
+    }
+</style>
+
+<script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import SplitType from 'split-type';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Footer Pill Reveal/Scale Scrub
+        const pill = document.querySelector('[data-gsap="footer-pill"]');
+        if (pill) {
+            gsap.from(pill, {
+                scale: 0.95,
+                y: 100,
+                borderTopLeftRadius: "50vw",
+                borderTopRightRadius: "50vw",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: pill,
+                    start: "top 100%", 
+                    end: "top 30%",
+                    scrub: 1
+                }
+            });
+        }
+
+        // Footer Title Word Stagger
+        const footerTitle = document.querySelector('[data-gsap="footer-title"]');
+        if (footerTitle) {
+            gsap.set(footerTitle, { opacity: 1, clipPath: 'none' });
+            
+            const split = new SplitType(footerTitle, { types: 'lines, words' });
+            
+            // Wrap lines in hidden overflow mask
+            split.lines.forEach(line => {
+                const wrapper = document.createElement('div');
+                wrapper.style.overflow = 'hidden';
+                wrapper.style.display = 'block';
+                line.parentNode.insertBefore(wrapper, line);
+                wrapper.appendChild(line);
+            });
+
+            gsap.to(split.words, {
+                y: '0%',
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.1,
+                ease: 'power4.out',
+                scrollTrigger: {
+                    trigger: footerTitle,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        }
+    });
 </script>

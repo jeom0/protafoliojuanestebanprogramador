@@ -11,9 +11,10 @@
   "dependencies": {
     "@astrojs/tailwind": "6.0.0",
     "astro": "5.1.0",
+    "clsx": "2.1.1",
     "gsap": "3.12.5",
     "lenis": "1.1.20",
-    "clsx": "2.1.1",
+    "split-type": "^0.3.4",
     "tailwind-merge": "2.5.2",
     "tailwindcss": "3.4.13"
   }

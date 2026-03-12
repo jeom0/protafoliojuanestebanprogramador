@@ -6,7 +6,7 @@ import { siteData } from '../data/site';
   <nav class="container mx-auto px-6 lg:px-12 py-5 flex justify-between items-center" id="nav-container">
     
     <!-- Minimalist Typographic Logo -->
-    <a href="#inicio" class="group flex items-center relative z-[110] overflow-hidden">
+    <a href="#inicio" class="magnetic-btn group flex items-center relative z-[110] overflow-hidden">
         <span class="font-heading text-2xl md:text-3xl uppercase font-black text-black flex">
             {'JUAN.'.split('').map((letter, i) => (
                 <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full" style={`transition-delay: ${i * 30}ms`}>{letter}</span>
@@ -29,7 +29,7 @@ import { siteData } from '../data/site';
       ].map((item) => (
         <a 
           href={item.href} 
-          class="font-sans text-xs uppercase font-bold tracking-widest text-black/60 hover:text-black transition-colors relative group overflow-hidden flex"
+          class="magnetic-btn font-sans text-xs uppercase font-bold tracking-widest text-black/60 hover:text-black transition-colors relative group overflow-hidden flex p-2"
         >
             <div class="relative">
                 <span class="flex">
@@ -48,7 +48,7 @@ import { siteData } from '../data/site';
     </div>
 
     <!-- CTA Button (Desktop) -->
-    <a href="#contacto" class="hidden md:flex bg-black text-white px-8 py-3 rounded-full font-sans text-xs uppercase font-bold tracking-widest hover:bg-[#0066ff] hover:scale-105 active:scale-95 transition-all duration-300">
+    <a href="#contacto" class="magnetic-btn hidden md:flex bg-black text-white px-8 py-3 rounded-full font-sans text-xs uppercase font-bold tracking-widest hover:bg-[#0066ff] transition-all duration-300">
         HIRE ME
     </a>
 

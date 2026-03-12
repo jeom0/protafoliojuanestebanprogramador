@@ -1,0 +1,111 @@
+{
+    "name": "Portfolio AI Assistant",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "portfolio-chat",
+                "responseMode": "lastNode",
+                "options": {}
+            },
+            "id": "e8a1b2c3-1111-4fa3-b123-5e9a3b2b9a1a",
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                200,
+                300
+            ],
+            "webhookId": "PORTFOLIO-AI-WEBHOOK"
+        },
+        {
+            "parameters": {
+                "model": "gpt-4o-mini",
+                "messages": {
+                    "messageValues": [
+                        {
+                            "message": "Eres el asistente virtual personal de Juan Esteban Ospina, un ingeniero de software especializado en Backend, Arquitecturas Escalables y Automatizaciones con n8n. Tu trabajo es hablar con los clientes que visitan su portafolio.\n\nReglas:\n1. Eres amable, directo y extremadamente profesional.\n2. Si piden cotizaciones o preguntan sobre tecnologías, diles que Juan es experto en Node.js, Python, Laravel y AWS, y pídeles su correo o diles que usen el botón de WhatsApp al final de la página.\n3. Responde de forma muy concisa, no más de 2 o 3 oraciones por mensaje."
+                        },
+                        {
+                            "role": "user",
+                            "message": "={{ $json.body.message }}"
+                        }
+                    ]
+                },
+                "options": {
+                    "temperature": 0.7
+                }
+            },
+            "id": "f5d7c8e9-2222-4a12-8888-abcdef123456",
+            "name": "OpenAI/ChatGPT",
+            "type": "n8n-nodes-base.openAi",
+            "typeVersion": 1.2,
+            "position": [
+                420,
+                300
+            ],
+            "credentials": {
+                "openAiApi": {
+                    "id": "YOUR_OPENAI_CREDENTIAL_ID",
+                    "name": "OpenAI account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "keepOnlySet": true,
+                "values": {
+                    "string": [
+                        {
+                            "name": "reply",
+                            "value": "={{ $json.message.content }}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "a1b2c3d4-3333-4cdf-9876-123456abcdef",
+            "name": "Format Response",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 2,
+            "position": [
+                640,
+                300
+            ]
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI/ChatGPT",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OpenAI/ChatGPT": {
+            "main": [
+                [
+                    {
+                        "node": "Format Response",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "active": false,
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "versionId": "ebf664a7-84e0-4ad3-9e45-d04babe9b252",
+    "meta": {
+        "templateCredsSetupCompleted": true
+    },
+    "id": "AI-Assistant-Template",
+    "tags": []
+}

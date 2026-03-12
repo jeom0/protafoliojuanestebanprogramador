@@ -14,13 +14,13 @@ import { siteData } from '../data/site';
         </div>
 
         <!-- Huge Headline (DiegoLiv Style) -->
-        <h1 class="font-heading text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[140px] leading-[0.8] tracking-[-0.04em] text-black w-full break-words uppercase mix-blend-multiply">
+        <h1 data-gsap="hero-title" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);" class="font-heading text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[140px] leading-[0.8] tracking-[-0.04em] text-black w-full break-words uppercase mix-blend-multiply opacity-0">
             INGENIERÍA <br/>
             <span class="text-black/30 italic pr-2">DE SOFTWARE</span> <br/>
             DE ALTO NIVEL.
         </h1>
         
-        <p class="mt-12 max-w-2xl text-lg md:text-xl font-sans text-black/60 font-medium leading-relaxed">
+        <p data-gsap="hero-desc" class="mt-12 max-w-2xl text-lg md:text-xl font-sans text-black/60 font-medium leading-relaxed opacity-0 translate-y-4">
             {siteData.shortBio} Creo soluciones backend robustas y automatizaciones n8n que escalan.
         </p>
 
@@ -53,3 +53,55 @@ import { siteData } from '../data/site';
         </div>
     </div>
 </section>
+
+<style is:global>
+    /* Prevent FOUC on split text */
+    [data-gsap="hero-title"] .char {
+        transform: translateY(110%);
+        opacity: 0;
+    }
+</style>
+
+<script>
+    import gsap from 'gsap';
+    import SplitType from 'split-type';
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        const titleElements = document.querySelectorAll('[data-gsap="hero-title"]');
+        if (titleElements.length === 0) return;
+
+        // Reset visibility so GSAP can take over
+        gsap.set('[data-gsap="hero-title"]', { opacity: 1, clipPath: 'none' });
+        
+        // Split the text into characters
+        const split = new SplitType('[data-gsap="hero-title"]', { types: 'lines, words, chars' });
+        
+        // Wrap lines in overflow-hidden for the reveal mask effect
+        split.lines.forEach(line => {
+            const wrapper = document.createElement('div');
+            wrapper.style.overflow = 'hidden';
+            wrapper.style.display = 'inline-block';
+            wrapper.style.verticalAlign = 'top';
+            line.parentNode.insertBefore(wrapper, line);
+            wrapper.appendChild(line);
+        });
+
+        // The master timeline (Diegoliv staggered entry)
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+        tl.to(split.chars, {
+            y: '0%',
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.015,
+            delay: 0.2
+        })
+        .to('[data-gsap="hero-desc"]', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out'
+        }, "-=0.8");
+    });
+</script>
