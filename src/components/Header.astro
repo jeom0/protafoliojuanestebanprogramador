@@ -60,7 +60,9 @@ import { siteData } from '../data/site';
     </button>
   </nav>
 
-  <!-- Mobile Menu Drawer (Solid Light) -->
+</header>
+
+  <!-- Mobile Menu Drawer (Solid Light) - Moved outside header to fix CSS containing block issue -->
   <div id="mobile-menu" class="fixed inset-0 z-[140] -translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-6 md:hidden bg-[#F2F2F2] isolate h-[100dvh] w-full px-4">
     
     {[
@@ -82,7 +84,6 @@ import { siteData } from '../data/site';
         HIRE ME
       </a>
   </div>
-</header>
 
 <script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
