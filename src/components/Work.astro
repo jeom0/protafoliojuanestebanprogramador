@@ -51,7 +51,20 @@ import { projects } from '../data/projects';
                <!-- Actual Image -->
                {index === 0 && <img src="/images/project-conduser.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
                {index === 1 && <img src="/images/project-instagram.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
-               {index === 2 && <img src="/images/project-whatsapp.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
+               <!-- WhatsApp Custom SVG Composition -->
+               {index === 2 && (
+                   <div class="absolute inset-0 z-20 flex items-center justify-center bg-gradient-to-br from-[#075E54]/20 to-[#128C7E]/40 overflow-hidden group-hover:from-[#075E54]/40 group-hover:to-[#25D366]/40 transition-all duration-700">
+                       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#25D366] to-transparent animate-pulse" style="animation-duration: 4s;"></div>
+                       
+                       <!-- 3D Floating WhatsApp Icon -->
+                       <div class="relative w-32 h-32 flex items-center justify-center transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500 will-change-transform">
+                           <div class="absolute inset-0 bg-[#25D366] rounded-full blur-xl opacity-40 group-hover:opacity-60 transition-opacity"></div>
+                           <svg class="w-full h-full text-[#25D366] drop-shadow-[0_10px_20px_rgba(37,211,102,0.4)]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M11.993 0C5.367 0 0 5.366 0 11.995c0 2.65.86 5.105 2.308 7.15L.892 24l5.006-1.314c1.954 1.258 4.29 1.986 6.784 1.986C19.317 24 24 18.634 24 12c0-6.63-5.366-12-12.007-12zm6.657 17.185c-.279.789-1.545 1.517-2.128 1.579-.536.056-1.228.096-3.411-.806-2.774-1.144-4.551-4.008-4.691-4.194-.14-.186-1.121-1.492-1.121-2.844 0-1.352.704-2.016.953-2.28.249-.264.544-.33.722-.33.179 0 .358.008.514.016.163.008.381-.062.599.467.225.544 1.057 2.58.1149 2.766.093.187-.031.296-.124.436-.093.14-.194.303-.279.389-.093.093-.194.194-.085.381.109.187.482.793 1.034 1.284.711.63 1.306.824 1.492.918.187.093.296.078.405-.031.109-.109.474-.552.599-.739.124-.187.249-.156.419-.093.171.062 1.081.513 1.267.607.187.093.311.14.358.218.047.078.047.451-.233 1.24z"/>
+                           </svg>
+                       </div>
+                   </div>
+               )}
                {index > 2 && <div class="absolute inset-0 bg-blue-600/10 z-20 opacity-0 group-hover:opacity-100 transition-opacity"></div>}
                
                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 z-30 pointer-events-none"></div>

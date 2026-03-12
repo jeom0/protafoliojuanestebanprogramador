@@ -98,39 +98,32 @@ import { siteData } from '../data/site';
         });
     });
 
-    // Scroll Logic
-    let ticking = false;
+    // Scroll Logic (Instantaneous)
     window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                if (window.scrollY > 30) {
-                    if(header) {
-                        header.style.background = 'rgba(3, 6, 11, 0.7)';
-                        header.style.backdropFilter = 'blur(40px) saturate(200%)';
-                        header.style.webkitBackdropFilter = 'blur(40px) saturate(200%)';
-                        header.style.borderBottomColor = 'rgba(255,255,255,0.05)';
-                        header.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.6)';
-                    }
-                    if(nav) {
-                        nav.classList.remove('py-6');
-                        nav.classList.add('py-4');
-                    }
-                } else {
-                    if(header) {
-                        header.style.background = 'transparent';
-                        header.style.backdropFilter = 'none';
-                        header.style.webkitBackdropFilter = 'none';
-                        header.style.borderBottomColor = 'transparent';
-                        header.style.boxShadow = 'none';
-                    }
-                    if(nav) {
-                        nav.classList.remove('py-4');
-                        nav.classList.add('py-6');
-                    }
-                }
-                ticking = false;
-            });
-            ticking = true;
+        if (window.scrollY > 5) {
+            if(header) {
+                header.style.background = 'rgba(3, 6, 11, 0.85)';
+                header.style.backdropFilter = 'blur(40px) saturate(200%)';
+                header.style.webkitBackdropFilter = 'blur(40px) saturate(200%)';
+                header.style.borderBottomColor = 'rgba(255,255,255,0.08)';
+                header.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.6)';
+            }
+            if(nav) {
+                nav.classList.remove('py-6');
+                nav.classList.add('py-4');
+            }
+        } else {
+            if(header) {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.webkitBackdropFilter = 'none';
+                header.style.borderBottomColor = 'transparent';
+                header.style.boxShadow = 'none';
+            }
+            if(nav) {
+                nav.classList.remove('py-4');
+                nav.classList.add('py-6');
+            }
         }
     }, { passive: true });
   });
