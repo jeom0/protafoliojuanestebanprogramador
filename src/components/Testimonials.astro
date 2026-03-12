@@ -43,126 +43,127 @@ const testimonials = [
 ];
 ---
 
-<section id="testimonios-wrapper" class="relative w-full bg-[#f8fafc] overflow-hidden" style="min-height: 100vh;">
-  
-  <!-- Massive Background Parallax Text -->
-  <div class="absolute inset-x-0 top-[15%] flex items-center justify-center opacity-10 pointer-events-none overflow-hidden select-none z-0">
-    <h2 data-gsap="test-bg-text" class="font-heading uppercase text-black font-black text-center leading-[0.85]" style="font-size: clamp(60px, 15vw, 250px); letter-spacing: -0.05em;">
-      HAPPY<br/>CLIENTS,<br/>HAPPY ME.
-    </h2>
-  </div>
+<section id="testimonios-wrapper" class="relative w-full bg-[#f8fafc] overflow-hidden py-40">
 
-  <div id="testimonios-pin" class="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center z-10" style="perspective: 1500px;">
-    
-    <!-- Section Label -->
-    <p class="absolute top-[10%] md:top-[15%] text-center w-full font-sans text-[10px] font-black uppercase tracking-[0.3em] text-[#0066ff]">
-      TESTIMONIOS
-    </p>
+<!-- Background Text -->
+<div class="absolute inset-x-0 top-[10%] flex justify-center opacity-[0.06] pointer-events-none select-none">
+<h2 class="font-black uppercase text-black text-center leading-[0.8]"
+style="font-size: clamp(80px, 14vw, 220px); letter-spacing:-0.05em;">
+CLIENTS
+</h2>
+</div>
 
-    <!-- Stacking Scroll Container -->
-    <div id="test-scroll-container" class="relative w-full h-full flex items-center justify-center">
-      
-      {testimonials.map((t, i) => (
-        <div class="test-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] md:w-[60vw] max-w-[800px] bg-[#F2F6FA] rounded-3xl p-8 md:p-16 flex flex-col gap-6 md:gap-8 relative text-center" style="transform-style: preserve-3d; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 40px 100px rgba(0,0,0,0.15);">
-          
-          <div class="flex justify-center mb-2">
-            <svg width="40" height="32" viewBox="0 0 40 32" fill="none">
-            <path d="M0 32V20.267C0 13.333 1.778 8.089 5.333 4.444 8.889 0.8 13.956 -0.444 20.444 0.133V6.222C17.067 6.489 14.489 7.6 12.711 9.556 10.933 11.467 10.044 14.044 10.044 17.244H17.244V32H0ZM22.756 32V20.267C22.756 13.333 24.533 8.089 28.089 4.444 31.644 0.8 36.711 -0.444 43.2 0.133V6.222C39.822 6.489 37.244 7.6 35.467 9.556 33.689 11.467 32.8 14.044 32.8 17.244H40V32H22.756Z" fill="#000"/>
-          </svg>
+<div id="testimonios-pin" class="relative w-full flex justify-center items-center">
 
-          <p class="font-sans text-xl md:text-3xl lg:text-[2.5vw] leading-[1.4] font-medium text-[#333333] tracking-tight relative z-10 w-full max-w-2xl mx-auto">
-            {t.quote}
-          </p>
-          
-          <div class="flex flex-col items-center justify-center w-full pt-4 mt-auto">
-            <span class="font-sans text-xs md:text-sm font-black uppercase tracking-widest text-[#111111]">{t.name}</span>
-            <span class="font-sans text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-black/40 mt-1">{t.company}</span>
-          </div>
-        </div>
-      ))}
+<div id="test-scroll-container"
+class="relative w-full max-w-5xl h-[520px] flex items-center justify-center"
+style="perspective:2000px">
 
-    </div>
-  </div>
+{testimonials.map((t) => (
+
+<div class="test-card absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+w-[92%] md:w-[70%] max-w-[760px]
+bg-white rounded-3xl p-10 md:p-14
+flex flex-col gap-6 text-center
+shadow-[0_35px_80px_rgba(0,0,0,0.15)]
+border border-black/5
+will-change-transform">
+
+<!-- Quote icon -->
+<div class="flex justify-center mb-2 opacity-60">
+<svg width="32" height="28" viewBox="0 0 40 32" fill="none">
+<path d="M0 32V20.267C0 13.333 1.778 8.089 5.333 4.444 8.889 0.8 13.956 -0.444 20.444 0.133V6.222C17.067 6.489 14.489 7.6 12.711 9.556 10.933 11.467 10.044 14.044 10.044 17.244H17.244V32H0ZM22.756 32V20.267C22.756 13.333 24.533 8.089 28.089 4.444 31.644 0.8 36.711 -0.444 43.2 0.133V6.222C39.822 6.489 37.244 7.6 35.467 9.556 33.689 11.467 32.8 14.044 32.8 17.244H40V32H22.756Z" fill="#000"/>
+</svg>
+</div>
+
+<p class="font-sans text-lg md:text-2xl leading-relaxed text-[#333] max-w-2xl mx-auto">
+{t.quote}
+</p>
+
+<div class="pt-4">
+<span class="block text-xs font-bold tracking-widest uppercase">
+{t.name}
+</span>
+
+<span class="block text-[11px] opacity-50 uppercase tracking-[0.2em]">
+{t.company}
+</span>
+</div>
+
+</div>
+
+))}
+
+</div>
+</div>
+
 </section>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.getElementById('testimonios-wrapper');
-    const pin = document.getElementById('testimonios-pin');
-    const container = document.getElementById('test-scroll-container');
-    const cards = gsap.utils.toArray('.test-card');
+gsap.registerPlugin(ScrollTrigger);
 
-    if (!wrapper || !pin || cards.length === 0) return;
+document.addEventListener("DOMContentLoaded", () => {
 
-    // Background Text Parallax
-    gsap.to('[data-gsap="test-bg-text"]', {
-      xPercent: -20,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapper,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
+const cards = gsap.utils.toArray(".test-card");
 
-    // 3D Stacking Timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapper,
-        pin: pin,
-        start: "center center",
-        end: () => `+=${cards.length * 60}vh`, // Reduced space down to 60vh per card
-        scrub: 1, // Smooth dampening
-        anticipatePin: 1
-      }
-    });
+if(!cards.length) return;
 
-    // Initial State: First card is centered, rest are behind it (scaled down, rotated back)
-    gsap.set(cards[0], { zIndex: cards.length, scale: 1, rotationX: 0, opacity: 1, y: 0 });
-    for(let i = 1; i < cards.length; i++) {
-        gsap.set(cards[i], { 
-            zIndex: cards.length - i, 
-            scale: 0.85 - (i * 0.05), // Each subsequent card is smaller
-            rotationX: 15, // Tilted back
-            y: i * 30, // Pushed down 
-            opacity: 0
-        });
-    }
+gsap.set(cards, {
+transformStyle: "preserve-3d"
+});
 
-    // Animate each transition
-    for(let i = 0; i < cards.length - 1; i++) {
-        const currentCard = cards[i];
-        const nextCard = cards[i + 1];
+// estado inicial stack
+cards.forEach((card, i) => {
 
-        // Current card falls forward and fades out
-        tl.to(currentCard, {
-            rotationX: -25, // Falls forward
-            y: -100, // Moves up
-            scale: 1.1,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.inOut"
-        }, i);
+gsap.set(card, {
+z: -i * 200,
+scale: 1 - i * 0.05,
+opacity: i === 0 ? 1 : 0.35
+});
 
-        // All subsequent cards move up one slot in the stack
-        for(let j = i + 1; j < cards.length; j++) {
-            const card = cards[j];
-            const isNext = j === i + 1;
-            
-            tl.to(card, {
-                scale: isNext ? 1 : 0.85 - ((j - i - 1) * 0.05),
-                rotationX: isNext ? 0 : 15,
-                y: isNext ? 0 : (j - i - 1) * 30,
-                opacity: isNext ? 1 : (j === i + 2 ? 0.5 : 0), // Fade in the one behind
-                duration: 1,
-                ease: "power2.inOut"
-            }, i);
-        }
-    }
-  });
+});
+
+// timeline
+const tl = gsap.timeline({
+
+scrollTrigger: {
+trigger: "#testimonios-wrapper",
+start: "top center",
+end: `+=${cards.length * 220}`,
+scrub: true,
+pin: "#testimonios-pin",
+anticipatePin: 1
+}
+
+});
+
+// animación
+cards.forEach((card, i) => {
+
+if(i === cards.length - 1) return;
+
+const next = cards[i + 1];
+
+tl.to(card, {
+z: 250,
+scale: 1.15,
+opacity: 0,
+duration: 1,
+ease: "power2.inOut"
+}, i);
+
+tl.to(next, {
+z: 0,
+scale: 1,
+opacity: 1,
+duration: 1,
+ease: "power2.inOut"
+}, i);
+
+});
+
+});
 </script>
