@@ -113,14 +113,20 @@ import { siteData } from '../data/site';
     let lastScrollY = window.scrollY;
     
     window.addEventListener('scroll', () => {
+        // Don't hide header if mobile menu is open
         if(window.innerWidth < 768 && menuToggle?.classList.contains('is-active')) return;
         
-        if (window.scrollY > lastScrollY && window.scrollY > 100) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
+        const currentScrollY = window.scrollY;
+        
+        // Scrolling DOWN & past the intro: hide header completely
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            header.style.transform = 'translateY(-110%)';
+        } 
+        // Scrolling UP or at the very top: show header exactly at 0
+        else {
             header.style.transform = 'translateY(0)';
         }
-        lastScrollY = window.scrollY;
+        lastScrollY = currentScrollY;
     }, { passive: true });
   });
 </script>
