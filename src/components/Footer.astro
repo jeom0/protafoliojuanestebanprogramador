@@ -1,0 +1,46 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-20 relative overflow-hidden border-t" style="background:#0a0e1b; border-color:rgba(255,255,255,0.06);">
+  <!-- Subtle glow in footer -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] pointer-events-none" style="background:radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%);"></div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-16 mb-16 reveal-on-scroll">
+      <!-- Brand -->
+      <div class="max-w-xl">
+          <div class="font-heading text-4xl uppercase tracking-tighter mb-4 font-black" style="color:#f1f5f9;">
+            OSPINA<span style="color:#60a5fa;">_DEV</span>
+          </div>
+          <p class="text-lg font-medium uppercase tracking-[0.15em] leading-snug" style="color:#334155;">
+              Ingeniería backend de alto rendimiento.<br/>Laravel · Node.js · Bases de Datos · Asesoría.
+          </p>
+      </div>
+
+      <!-- Links -->
+      <div class="flex flex-wrap gap-12 lg:gap-24">
+          <div class="space-y-4">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-[0.4em]" style="color:#3b82f6;">NODOS_SOCIALES_</div>
+              <ul class="space-y-2 font-heading text-xl italic font-black">
+                  <li><a href="#" class="uppercase transition-colors duration-300" style="color:#475569;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='#475569'">LinkedIn //</a></li>
+                  <li><a href="#" class="uppercase transition-colors duration-300" style="color:#475569;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='#475569'">GitHub //</a></li>
+              </ul>
+          </div>
+          <div class="space-y-4">
+              <div class="font-mono text-[9px] font-bold uppercase tracking-[0.4em]" style="color:#3b82f6;">PROTOCOLO_</div>
+              <div class="font-heading text-xl font-black uppercase tracking-tighter" style="color:#1e3a5f;">BACKEND ENGINEER // COLOMBIA</div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-8 font-mono text-[9px] font-bold uppercase tracking-[0.4em] reveal-on-scroll delay-100" style="border-top:1px solid rgba(255,255,255,0.05);">
+        <div style="color:#1e3a5f;">© {currentYear} JUAN ESTEBAN OSPINA MARÍN. ALL SYSTEMS REGISTERED_</div>
+        <div class="flex items-center gap-4">
+            <span class="animate-pulse" style="color:#334155;">BACKEND SYSTEMS ONLINE // COLOMBIA</span>
+            <div class="w-2 h-2 rounded-full" style="background:#3b82f6; box-shadow:0 0 10px rgba(59,130,246,0.6);"></div>
+        </div>
+    </div>
+  </div>
+</footer>

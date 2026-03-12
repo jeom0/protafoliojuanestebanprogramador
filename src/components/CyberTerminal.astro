@@ -1,0 +1,91 @@
+---
+---
+<div class="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] cyber-terminal-container">
+    <!-- Floating Data Nodes & Lines -->
+    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-[0_0_20px_rgba(0,255,136,0.2)]">
+        <defs>
+            <filter id="nodeGlow">
+                <feGaussianBlur stdDeviation="1.5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+        </defs>
+
+        <!-- Central Terminal Core -->
+        <rect x="80" y="80" width="40" height="40" rx="4" fill="none" stroke="#00FF88" stroke-width="0.5" class="animate-pulse" />
+        <rect x="85" y="85" width="30" height="30" rx="2" fill="none" stroke="#00FF88" stroke-width="0.2" stroke-opacity="0.5" />
+        
+        <!-- Peripheral Nodes -->
+        <g class="nodes-layer">
+            <!-- Node 1 -->
+            <circle cx="40" cy="60" r="3" fill="#00FF88" filter="url(#nodeGlow)" class="animate-ping-slow" />
+            <rect x="35" y="55" width="10" height="10" rx="1" fill="none" stroke="#00FF88" stroke-width="0.2" />
+            
+            <!-- Node 2 -->
+            <circle cx="160" cy="50" r="2.5" fill="#00FF88" filter="url(#nodeGlow)" />
+            <rect x="155" y="45" width="10" height="10" rx="1" fill="none" stroke="#00FF88" stroke-width="0.2" />
+            
+            <!-- Node 3 -->
+            <circle cx="140" cy="150" r="3.5" fill="#00FF88" filter="url(#nodeGlow)" class="animate-pulse" />
+            <rect x="135" y="145" width="10" height="10" rx="1" fill="none" stroke="#00FF88" stroke-width="0.2" />
+
+            <!-- Node 4 -->
+            <circle cx="50" cy="140" r="2" fill="#00FF88" filter="url(#nodeGlow)" />
+            <rect x="45" y="135" width="10" height="10" rx="1" fill="none" stroke="#00FF88" stroke-width="0.2" />
+        </g>
+
+        <!-- Connecting Data Lines (Animated) -->
+        <g class="lines-layer" stroke="#00FF88" stroke-width="0.2" stroke-opacity="0.3">
+            <line x1="100" y1="100" x2="40" y2="60" class="data-line" />
+            <line x1="100" y1="100" x2="160" y2="50" class="data-line-delayed" />
+            <line x1="100" y1="100" x2="140" y2="150" class="data-line" />
+            <line x1="100" y1="100" x2="50" y2="140" class="data-line-delayed" />
+            
+            <line x1="40" y1="60" x2="160" y2="50" stroke-dasharray="2, 4" />
+            <line x1="160" y1="50" x2="140" y2="150" stroke-dasharray="2, 4" />
+            <line x1="140" y1="150" x2="50" y2="140" stroke-dasharray="2, 4" />
+            <line x1="50" y1="140" x2="40" y2="60" stroke-dasharray="2, 4" />
+        </g>
+
+        <!-- Technical Telemetry Symbols -->
+        <g opacity="0.4" font-family="monospace" font-size="4" fill="#00FF88">
+            <text x="10" y="20">SYS_V14.PROTOCOL.ELITE</text>
+            <text x="10" y="30">NODE_AUTH_OK</text>
+            <text x="140" y="180">DATA_SYNC_ACTIVE</text>
+        </g>
+    </svg>
+
+    <!-- Background Halo (Restrained) -->
+    <div id="terminal-halo" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#00FF88]/5 rounded-full blur-[60px] animate-pulse -z-10"></div>
+</div>
+
+<style>
+    .cyber-terminal-container {
+        perspective: 1000px;
+    }
+
+    .data-line {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+        animation: data-flow 3s linear infinite;
+    }
+
+    .data-line-delayed {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+        animation: data-flow 3s linear infinite 1.5s;
+    }
+
+    @keyframes data-flow {
+        from { stroke-dashoffset: 100; opacity: 0.5; }
+        50% { opacity: 0.8; }
+        to { stroke-dashoffset: 0; opacity: 0.1; }
+    }
+
+    .animate-ping-slow {
+        animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes ping {
+        75%, 100% { transform: scale(2); opacity: 0; }
+    }
+</style>

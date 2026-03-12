@@ -1,0 +1,76 @@
+<div id="surreal-connection-container" class="fixed inset-0 z-[1] pointer-events-none opacity-20">
+    <svg id="surreal-svg" class="w-full h-full">
+        <defs>
+            <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3" markerHeight="3">
+                <circle cx="5" cy="5" r="5" fill="#00FF88" />
+            </marker>
+            <radialGradient id="packet-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" stop-color="#00FF88" stop-opacity="1" />
+                <stop offset="100%" stop-color="#00FF88" stop-opacity="0" />
+            </radialGradient>
+        </defs>
+        <path id="wire-1" d="" fill="none" stroke="#00FF88" stroke-width="0.5" marker-end="url(#dot)"></path>
+        <path id="wire-2" d="" fill="none" stroke="#00FF88" stroke-width="0.5" marker-end="url(#dot)"></path>
+
+        <!-- Moving Packets -->
+        <circle id="packet-1" r="4" fill="url(#packet-glow)">
+            <animateMotion dur="10s" repeatCount="indefinite" path="">
+                <mpath href="#wire-1" />
+            </animateMotion>
+        </circle>
+        <circle id="packet-2" r="3" fill="url(#packet-glow)">
+            <animateMotion dur="7s" begin="2s" repeatCount="indefinite" path="">
+                <mpath href="#wire-2" />
+            </animateMotion>
+        </circle>
+    </svg>
+</div>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function updateWires() {
+        const svg = document.getElementById('surreal-svg');
+        const wire1 = document.getElementById('wire-1');
+        const wire2 = document.getElementById('wire-2');
+        if (!svg || !wire1 || !wire2) return;
+
+        const w = window.innerWidth;
+        const h = Math.max(document.documentElement.scrollHeight, 10000); // Fixed for very long pages
+        
+        // Path 1: Down the left
+        let d1 = "M" + (w * 0.1) + ",0";
+        for (let y = 100; y <= h; y += 300) {
+            const x = w * 0.1 + Math.sin(y * 0.005) * 60;
+            d1 += " L" + x + "," + y;
+        }
+        wire1.setAttribute('d', d1);
+
+        // Path 2: Down the right
+        let d2 = "M" + (w * 0.9) + ",0";
+        for (let y = 150; y <= h; y += 400) {
+            const x = (y / 400 % 2 === 0) ? w * 0.85 : w * 0.95;
+            d2 += " L" + x + "," + y;
+        }
+        wire2.setAttribute('d', d2);
+    }
+
+    window.addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+        // Move the whole SVG container slightly for parallax
+        gsap.to('#surreal-connection-container', { y: -scroll * 0.1, duration: 0.5 });
+    });
+
+    document.querySelectorAll('#surreal-svg path').forEach(path => {
+        (path as SVGPathElement).style.strokeDasharray = "5, 15";
+    });
+
+    window.addEventListener('load', updateWires);
+    window.addEventListener('resize', updateWires);
+    
+    // Periodically update paths if content grows
+    setInterval(updateWires, 3000);
+</script>

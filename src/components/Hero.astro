@@ -1,0 +1,125 @@
+---
+import NetworkMesh from './NetworkMesh.astro';
+---
+
+<section id="inicio" class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden bg-transparent pt-32 pb-16">
+  <div class="container mx-auto px-6 relative z-20 flex flex-col h-full justify-center">
+    
+    <!-- AVAILABILITY STATUS -->
+    <div class="w-full flex justify-between items-center mb-12 reveal-on-scroll font-mono text-[10px] tracking-[0.2em] text-slate-500 uppercase">
+        <div class="flex items-center gap-3">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" style="box-shadow: 0 0 8px rgba(52,211,153,0.6);"></span>
+            <span>Disponible · Colombia</span>
+        </div>
+        <div class="hidden md:flex items-center gap-6">
+            <span>Laravel · Node.js · SQL / NoSQL</span>
+        </div>
+    </div>
+
+    <!-- BENTO GRID HERO (V34 DARK GLASS) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 grid-rows-none md:grid-rows-3 gap-6 lg:gap-8 min-h-[700px] place-content-center">
+        
+        <!-- MAIN TITLE & BIO -->
+        <div class="md:col-span-8 md:row-span-2 reveal-on-scroll delay-100 rounded-[3rem] p-10 lg:p-16 flex flex-col justify-between group bento-interactive animate-float transition-all duration-500 cursor-pointer will-change-transform relative overflow-hidden" 
+             style="animation-duration: 7s; transform: perspective(1000px) rotateX(var(--rotX, 0deg)) rotateY(var(--rotY, 0deg)) translateY(var(--y, 0px));"
+             data-modal-title="Arquitecturas Backend & APIs"
+             data-modal-desc="Especialista en el desarrollo de ecosistemas robustos utilizando Laravel y Node.js. Diseño de APIs escalables, integración de servicios y optimización de lógica de negocio para alto rendimiento."
+             data-modal-tags="Laravel,Node.js,APIs">
+            
+            <!-- Brackets -->
+            <div class="absolute top-8 left-8 w-4 h-4 border-t-2 border-l-2 border-blue-600/20 rounded-tl-lg"></div>
+            <div class="absolute bottom-8 right-8 w-4 h-4 border-b-2 border-r-2 border-blue-600/20 rounded-br-lg"></div>
+
+            <div>
+                <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-10 border backdrop-blur-sm" style="background:rgba(59,130,246,0.1); color:#93c5fd; border-color:rgba(59,130,246,0.2);">
+                    Ingeniero Backend & Consultor
+                </span>
+                <h1 class="font-heading text-4xl md:text-7xl leading-[0.85] tracking-tighter pb-2 relative transition-all duration-700" style="color:#f1f5f9; font-weight: 900;">
+                    JUAN ESTEBAN<br/>
+                    <span style="color:#60a5fa;">OSPINA M.</span>
+                </h1>
+                <div class="h-[1px] w-20 mt-4 transition-all duration-1000" style="background:rgba(96,165,250,0.3);"></div>
+            </div>
+            
+            <p class="text-lg md:text-2xl max-w-2xl mt-10 font-medium leading-relaxed tracking-tight" style="color:#94a3b8;">
+                Desarrollo sistemas backend sólidos con <strong style="color:#f1f5f9; font-weight:900;">Laravel y Node.js.</strong> <span style="color: #60a5fa;">Diseño arquitecturas de datos</span> de alta disponibilidad y asesorías estratégicas.
+            </p>
+        </div>
+
+        <!-- IMAGE / AVATAR WIDGET (Improved Sizing) -->
+        <div class="md:col-span-4 md:row-span-1 lg:row-span-2 reveal-on-scroll delay-200 rounded-[3rem] p-6 shadow-2xl flex items-center justify-center relative overflow-hidden group bento-interactive animate-float cursor-pointer min-h-[400px] md:min-h-0" 
+             style="animation-duration: 5s; animation-delay: 1s; transform: perspective(1000px) rotateX(var(--rotX, 0deg)) rotateY(var(--rotY, 0deg)) translateY(var(--y, 0px));">
+            
+            <div class="absolute inset-0 z-0">
+                <img src="/images/avatar-1.png" alt="Juan Esteban Ospina" class="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-110 group-hover:scale-100" />
+            </div>
+            
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+            
+            <!-- HUD Widget -->
+            <div class="absolute top-6 right-6 w-20 h-20 z-20 opacity-80 group-hover:opacity-100 transition-opacity">
+                <div class="cyber-planet scale-90 shadow-2xl"></div>
+            </div>
+
+            <div class="relative z-20 mt-auto w-full text-center pb-4">
+                <p style="color:#f1f5f9;" class="font-black text-[12px] tracking-[0.3em] uppercase drop-shadow-lg">JUAN ESTEBAN OSPINA M.</p>
+                <p style="color:#60a5fa;" class="font-mono text-[10px] tracking-widest mt-1 uppercase font-bold">Backend System Root</p>
+            </div>
+        </div>
+
+        <!-- STATUS & CTA WIDGET (Expansive Span) -->
+        <div class="md:col-span-6 md:row-span-1 reveal-on-scroll delay-300 rounded-[3rem] p-10 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden bento-interactive animate-float" style="background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(10,14,28,0.2) 100%); animation-duration: 6s; animation-delay: 0.5s;">
+            <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full" style="background:rgba(59,130,246,0.1); filter:blur(40px);"></div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="flex h-3 w-3 relative">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400" style="box-shadow:0 0 10px rgba(52,211,153,0.8);"></span>
+                    </span>
+                    <p class="font-mono text-[10px] font-black tracking-[0.3em] uppercase text-slate-500">System_Online_</p>
+                </div>
+                <p style="color:#f1f5f9;" class="text-4xl lg:text-5xl font-black tracking-tight leading-none uppercase">Iniciemos tu <br/> proyecto.</p>
+            </div>
+            <a href="#contacto" class="relative z-10 inline-flex items-center justify-center w-full font-black py-5 px-6 rounded-2xl transition-all duration-300 mt-8 text-xs tracking-[0.2em] uppercase shadow-2xl bg-blue-600 text-white hover:bg-blue-500 hover:scale-[1.02] active:scale-95">
+                <span>Cotizar Ahora</span>
+            </a>
+        </div>
+
+        <!-- METRICS WIDGET (Balanced Span) -->
+        <div class="md:col-span-6 md:row-span-1 reveal-on-scroll delay-400 rounded-[3rem] p-10 md:p-14 flex flex-col justify-center group bento-interactive animate-float" style="animation-duration: 6.5s; animation-delay: 1.5s;">
+            <p class="font-mono text-[10px] font-black tracking-[0.4em] uppercase mb-10 text-slate-500">Eficiencia_Técnica_</p>
+            <div class="w-full space-y-8">
+                <div>
+                    <div class="flex justify-between text-[10px] font-black mb-3 uppercase tracking-widest"><span class="text-slate-200">Backend Logic</span><span class="text-blue-400">99.9%</span></div>
+                    <div class="w-full rounded-full h-1.5 overflow-hidden bg-white/5 border border-white/5"><div class="h-1.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)]" style="width:99.9%;"></div></div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between text-[10px] font-black mb-3 uppercase tracking-widest"><span class="text-slate-200">Data Architecture</span><span class="text-blue-400">95.0%</span></div>
+                    <div class="w-full rounded-full h-1.5 overflow-hidden bg-white/5 border border-white/5"><div class="h-1.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)]" style="width:95%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NETWORK VISUAL (Full Width Bottom) -->
+        <div class="md:col-span-12 md:row-span-1 reveal-on-scroll delay-500 rounded-[3rem] relative overflow-hidden group h-[200px] flex items-center justify-center bento-interactive animate-float" style="animation-duration: 5.5s; animation-delay: 0.2s;">
+            <div class="absolute inset-0 flex items-center justify-center opacity-30">
+               <NetworkMesh />
+            </div>
+            
+            <div class="relative z-10 px-10 py-5 rounded-3xl border border-white/5 shadow-2xl flex items-center gap-6 backdrop-blur-3xl bg-blue-500/5">
+                <div class="flex -space-x-4">
+                    <div class="w-12 h-12 rounded-full border-2 border-slate-900 bg-slate-800 shadow-xl overflow-hidden"><img src="/images/avatar-1.png" class="w-full h-full object-cover opacity-50" /></div>
+                    <div class="w-12 h-12 rounded-full border-2 border-slate-900 bg-slate-700 shadow-xl"></div>
+                    <div class="w-12 h-12 rounded-full border-2 border-slate-900 bg-blue-600 flex items-center justify-center text-xs font-black text-white shadow-[0_0_20px_rgba(59,130,246,0.4)]">+10</div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-mono font-black tracking-[0.4em] uppercase text-white">Sistemas_Desplegados</span>
+                    <span class="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-blue-400 mt-1">Status: Active_Node_01</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<section id="proyectos" class="py-24 bg-transparent relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10 w-full h-full flex flex-col justify-center">
+    
+    <!-- HEADER BENTO (High Contrast V34) -->
+    <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8 reveal-on-scroll">
+      <div class="max-w-4xl">
+        <div class="flex items-center gap-4 mb-8">
+            <span class="px-5 py-2 rounded-full text-[10px] font-black tracking-widest uppercase border backdrop-blur-sm" style="background:rgba(59,130,246,0.1); color:#93c5fd; border-color:rgba(59,130,246,0.2);">
+                Portafolio Selecto
+            </span>
+        </div>
+        <h2 class="font-heading text-6xl md:text-8xl tracking-tighter leading-[0.85] font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-100 to-slate-400 pb-2">
+            PROYECTOS <br/> <span class="text-blue-500 italic drop-shadow-2xl">DESTACADOS.</span>
+        </h2>
+      </div>
+      <div class="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] text-right px-4 py-2 rounded-lg border border-white/5 shadow-2xl backdrop-blur-xl" style="background:rgba(255,255,255,0.03);">
+        Sistemas Desplegados: {projects.length}
+      </div>
+    </div>
+
+    <!-- BENTO PROJECT GRID (Liquid Glass V34) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 project-grid-v18">
+      {projects.map((project, index) => (
+        <div class={`group relative bento-interactive border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-500 flex flex-col h-[520px] animate-float reveal-on-scroll delay-${(index % 3) * 100 + 100} cursor-pointer will-change-transform`} 
+             style={`animation-duration: ${6 + (index % 3)}s; background: rgba(255,255,255,0.02);`}
+             data-modal-title={project.title}
+             data-modal-desc={project.desc}
+             data-modal-tags="Software,Backend,Escalabilidad">
+          
+          <!-- Corner Brackets -->
+          <div class="absolute top-6 left-6 w-3 h-3 border-t border-l border-blue-500/30 rounded-tl-md z-50"></div>
+          <div class="absolute bottom-6 right-6 w-3 h-3 border-b border-r border-blue-500/30 rounded-br-md z-50"></div>
+          
+          <!-- Explicit Image Area -->
+          <div class="h-[280px] w-full relative overflow-hidden border-b border-white/5">
+               <!-- System HUD Overlay -->
+               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 z-10 bg-black/40 backdrop-blur-[2px] group-hover:backdrop-blur-none transition-all duration-500">
+                   <div class="w-12 h-12 rounded-full border-2 border-dashed border-blue-400/50 animate-spin-slow mb-4"></div>
+                   <p class="text-white font-black text-xs mb-2 uppercase tracking-[0.3em] drop-shadow-lg">{project.title}</p>
+                   <span class="text-blue-400 font-mono text-[8px] font-black uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                       <span class="w-1 h-1 bg-blue-500 rounded-full animate-ping"></span>
+                       Status: Online_
+                   </span>
+               </div>
+               
+               <!-- Actual Image -->
+               {index === 0 && <img src="/images/project-conduser.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
+               {index === 1 && <img src="/images/project-instagram.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
+               {index === 2 && <img src="/images/project-whatsapp.png" alt={project.title} class="w-full h-full object-cover relative z-20 opacity-0 group-hover:scale-110 transition-transform duration-700 ease-out" onload="this.style.opacity='0.6'" />}
+               {index > 2 && <div class="absolute inset-0 bg-blue-600/10 z-20 opacity-0 group-hover:opacity-100 transition-opacity"></div>}
+               
+               <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 z-30 pointer-events-none"></div>
+          </div>
+
+          <!-- Content Area -->
+          <div class="p-8 lg:p-10 flex flex-col justify-between flex-grow relative z-40 transition-all duration-500">
+              <div>
+                  <div class="flex justify-between items-start mb-4">
+                      <h3 class="text-3xl font-black text-white tracking-tighter leading-none group-hover:text-blue-400 transition-colors uppercase">{project.title}</h3>
+                  </div>
+                  <p class="text-sm text-slate-400 font-medium leading-relaxed line-clamp-2 tracking-tight">
+                      {project.desc}
+                  </p>
+              </div>
+              
+              <!-- Tech Stack Tags -->
+              <div class="mt-6 flex flex-wrap gap-2">
+                  <span class="text-[9px] font-black tracking-widest uppercase text-blue-300 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full shadow-lg">Laravel</span>
+                  <span class="text-[9px] font-black tracking-widest uppercase text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1.5 rounded-full shadow-lg">Node.js</span>
+                  <span class="text-[9px] font-black tracking-widest uppercase text-slate-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full shadow-lg">API</span>
+              </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+

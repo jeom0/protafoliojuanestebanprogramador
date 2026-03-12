@@ -1,0 +1,84 @@
+---
+import { projects } from '../data/projects';
+
+const conduser = projects.find(p => p.title.includes("Conduser"));
+---
+
+<section class="py-32 px-6 md:px-12 bg-[#0B0D10] relative overflow-hidden" id="featured">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div class="reveal-featured">
+        <h2 class="text-xs font-mono text-[#00FF88] uppercase tracking-[0.4em] mb-8">03 — Featured Study</h2>
+        <h3 class="text-5xl md:text-8xl font-heading font-bold uppercase tracking-tighter mb-10 leading-[0.85]">
+          {conduser?.title}
+        </h3>
+        
+        <div class="space-y-8 mb-12">
+          <div class="grid grid-cols-3 gap-4 border-y border-white/10 py-8">
+            <div>
+              <p class="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] mb-2">Challenge</p>
+              <p class="text-xs md:text-sm font-medium uppercase">Scalability & UX</p>
+            </div>
+            <div>
+              <p class="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] mb-2">Role</p>
+              <p class="text-xs md:text-sm font-medium uppercase">Lead Developer</p>
+            </div>
+            <div>
+              <p class="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] mb-2">Year</p>
+              <p class="text-xs md:text-sm font-medium uppercase">{conduser?.year}</p>
+            </div>
+          </div>
+          
+          <p class="text-xl md:text-2xl text-white/50 leading-relaxed font-light">
+            {conduser?.summary}
+          </p>
+
+          <ul class="space-y-4 pt-4">
+            {conduser?.impactBullets.map(bullet => (
+              <li class="flex items-start gap-4">
+                <span class="text-[#00FF88] font-mono mt-1 text-xs">→</span>
+                <span class="text-sm md:text-base text-white/70 uppercase tracking-tight">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <a href={conduser?.url} target="_blank" class="group inline-flex items-center gap-6 p-1 pr-6 border border-white/10 rounded-full hover:border-[#00FF88]/50 transition-all duration-500">
+          <span class="w-12 h-12 flex items-center justify-center bg-white text-[#0B0D10] rounded-full group-hover:bg-[#00FF88] transition-colors duration-500">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14m-7-7 7 7-7 7"/>
+            </svg>
+          </span>
+          <span class="text-sm font-heading font-bold uppercase tracking-widest">Visit Project</span>
+        </a>
+      </div>
+
+      <div class="relative group reveal-featured" style="transition-delay: 300ms;">
+        <div class="aspect-[4/5] md:aspect-square overflow-hidden rounded-sm bg-white/5">
+          <img src={conduser?.image} alt={conduser?.title} class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2s] ease-out" />
+        </div>
+        <!-- Subtle Scanline effect for featured case -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,4px_100%]"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.reveal-featured', {
+    y: 100,
+    opacity: 0,
+    duration: 1.8,
+    ease: 'expo.out',
+    stagger: 0.4,
+    scrollTrigger: {
+      trigger: '#featured',
+      start: 'top 80%',
+    }
+  });
+</script>

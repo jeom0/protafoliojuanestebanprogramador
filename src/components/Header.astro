@@ -1,0 +1,122 @@
+---
+import { siteData } from '../data/site';
+---
+
+<header class="fixed top-0 left-0 w-full z-[100] transition-all duration-300 border-b border-transparent" id="main-header">
+  <nav class="container mx-auto px-6 py-6 flex justify-between items-center transition-all duration-500" id="nav-container">
+    <!-- Logo -->
+    <a href="#inicio" class="group flex items-center gap-3 relative z-[110]">
+        <div class="w-2.5 h-2.5 bg-blue-500 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.8)] transition-all duration-500 rounded-sm"></div>
+        <span class="font-heading text-xl md:text-2xl uppercase tracking-tighter font-black text-white">OSPINA<span class="text-blue-500">_DEV</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {[
+        { name: 'Inicio', href: '#inicio' },
+        { name: 'Servicios', href: '#servicios' },
+        { name: 'Proyectos', href: '#proyectos' },
+        { name: 'Proceso', href: '#proceso' },
+        { name: 'Contacto', href: '#contacto' },
+      ].map((item) => (
+        <a 
+          href={item.href} 
+          class="font-mono text-[10px] uppercase font-black tracking-[0.3em] transition-all duration-500 relative group/link text-slate-400 hover:text-blue-400"
+        >
+          {item.name}
+          <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-blue-500 group-hover/link:w-full transition-all duration-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-toggle" class="md:hidden relative z-[110] w-10 h-10 flex flex-col justify-center items-center gap-1.5 focus:outline-none group">
+        <span class="w-6 h-0.5 rounded-full transition-all duration-300 group-[.is-active]:rotate-45 group-[.is-active]:translate-y-2 bg-slate-200"></span>
+        <span class="w-6 h-0.5 rounded-full transition-all duration-300 group-[.is-active]:opacity-0 bg-slate-200"></span>
+        <span class="w-6 h-0.5 bg-blue-500 rounded-full transition-all duration-300 group-[.is-active]:-rotate-45 group-[.is-active]:-translate-y-2"></span>
+    </button>
+
+    <!-- CTA Button (Desktop) -->
+    <a href="#contacto" class="hidden md:flex group relative px-6 py-2.5 rounded-xl overflow-hidden transition-all duration-500 border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500 shadow-2xl">
+        <span class="relative z-10 font-mono text-[9px] uppercase tracking-widest font-black text-blue-300 group-hover:text-white transition-colors">CONECTAR_AHORA</span>
+        <div class="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-blue-600"></div>
+    </a>
+  </nav>
+
+  <!-- Mobile Menu Drawer (V35 Expert) -->
+  <div id="mobile-menu" class="fixed inset-0 backdrop-blur-3xl z-[105] translate-x-full transition-transform duration-700 flex flex-col items-center justify-center gap-10 md:hidden bg-[#03060b]/98">
+    
+    {[
+        { name: 'Inicio', href: '#inicio' },
+        { name: 'Servicios', href: '#servicios' },
+        { name: 'Proyectos', href: '#proyectos' },
+        { name: 'Proceso', href: '#proceso' },
+        { name: 'Contacto', href: '#contacto' },
+      ].map((item) => (
+        <a 
+          href={item.href} 
+          class="mobile-link font-heading text-5xl uppercase tracking-tighter font-black transition-all duration-500 text-slate-500 hover:text-blue-500 active:scale-90"
+        >
+          {item.name}
+        </a>
+      ))}
+      
+      <a href="#contacto" class="mt-8 px-12 py-5 text-white font-mono text-[11px] rounded-2xl uppercase tracking-[0.2em] font-black active:scale-95 transition-all bg-blue-600 shadow-[0_20px_40px_-10px_rgba(59,130,246,0.4)]">
+        INICIAR_PROYECTO
+      </a>
+  </div>
+</header>
+
+
+<script>
+    const header = document.getElementById('main-header');
+    const nav = document.getElementById('nav-container');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    // Toggle Menu
+    menuToggle?.addEventListener('click', () => {
+        menuToggle.classList.toggle('is-active');
+        mobileMenu?.classList.toggle('translate-x-full');
+        document.body.classList.toggle('overflow-hidden');
+    });
+
+    // Close on link click
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle?.classList.remove('is-active');
+            mobileMenu?.classList.add('translate-x-full');
+            document.body.classList.remove('overflow-hidden');
+        });
+    });
+
+    // Scroll Logic
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 30) {
+                    // Dark glass navbar on scroll (V35 Premium Glass)
+                    header.style.background = 'rgba(3, 6, 11, 0.7)';
+                    header.style.backdropFilter = 'blur(40px) saturate(200%)';
+                    header.style.webkitBackdropFilter = 'blur(40px) saturate(200%)';
+                    header.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+                    header.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.6)';
+                    nav?.classList.remove('py-6');
+                    nav?.classList.add('py-4');
+                } else {
+                    header.style.background = 'transparent';
+                    header.style.backdropFilter = 'none';
+                    header.style.webkitBackdropFilter = 'none';
+                    header.style.borderBottomColor = 'transparent';
+                    header.style.boxShadow = 'none';
+                    nav?.classList.remove('py-4');
+                    nav?.classList.add('py-6');
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+</script>

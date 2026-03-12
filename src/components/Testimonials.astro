@@ -1,0 +1,107 @@
+---
+import { testimonials } from '../data/testimonials';
+---
+
+<section id="testimonios" class="py-24 bg-transparent relative overflow-hidden">
+  
+  <div class="container mx-auto px-6 relative z-10 w-full h-full flex flex-col justify-center">
+    
+    <!-- HEADER (V35 Expert Overhaul) -->
+    <div class="mb-20 reveal-on-scroll text-center flex flex-col items-center">
+        <span class="px-5 py-2 rounded-full text-[10px] font-black tracking-widest uppercase inline-block border backdrop-blur-md mb-6" style="background:rgba(59,130,246,0.1); color:#93c5fd; border-color:rgba(59,130,246,0.2);">
+            Validación Social Verificada
+        </span>
+        <h2 class="font-heading text-5xl md:text-7xl tracking-tighter leading-[0.85] font-black text-transparent bg-clip-text bg-gradient-to-br from-slate-100 to-slate-400 pb-2">
+            TESTIMONIOS <br class="sm:hidden" /> <span class="text-blue-500 block sm:inline drop-shadow-2xl italic">REALES.</span>
+        </h2>
+    </div>
+
+    <!-- INFINITE MARQUEE (V35 Expert Glass) -->
+    <div class="relative w-full overflow-hidden py-10">
+        <!-- Seamless Loop Wrapper -->
+        <div class="flex gap-8 animate-marquee-slide hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing w-max">
+            <!-- First Set -->
+            {testimonials.map((t, index) => (
+                <div class="flex-shrink-0 w-[400px] bento-interactive rounded-[2.5rem] p-10 flex flex-col justify-between h-[380px] group relative">
+                    
+                    <!-- Corner Brackets -->
+                    <div class="absolute top-8 left-8 w-3 h-3 border-t border-l border-blue-500/30 rounded-tl-md"></div>
+                    <div class="absolute bottom-8 right-8 w-3 h-3 border-b border-r border-blue-500/30 rounded-br-md"></div>
+
+                    <!-- System Node Decorative -->
+                    <div class="absolute top-10 right-10 scale-[0.25] opacity-20 group-hover:opacity-40 transition-opacity">
+                        <div class="system-node"></div>
+                    </div>
+
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 overflow-hidden shadow-2xl relative group-hover:scale-110 transition-transform duration-500 p-1 backdrop-blur-xl">
+                            <img src={`/images/avatar-1.png`} alt={t.name} class="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100" />
+                        </div>
+                        <div>
+                            <h3 class="font-black text-xl text-white tracking-tighter uppercase">{t.name}</h3>
+                            <p class="font-mono text-[9px] text-blue-400 uppercase tracking-widest mt-1 font-black">{t.role}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex-grow">
+                        <div class="absolute -top-4 -left-4 text-7xl font-black text-blue-500/10 group-hover:text-blue-500/20 transition-colors pointer-events-none">"</div>
+                        <p class="text-lg text-slate-400 font-medium leading-relaxed tracking-tight relative z-10 group-hover:text-slate-200 transition-colors">
+                            {t.quote}
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/5 flex justify-between items-center group-hover:border-blue-500/20 transition-colors">
+                        <span class="font-mono text-[9px] uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
+                             <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_#3b82f6]"></span>
+                             Feedback Verificado_
+                        </span>
+                    </div>
+                </div>
+            ))}
+            <!-- Identical Double for Seamless Loop -->
+            {testimonials.map((t, index) => (
+                <div class="flex-shrink-0 w-[400px] bento-interactive rounded-[2.5rem] p-10 flex flex-col justify-between h-[380px] group relative">
+                    <div class="absolute top-8 left-8 w-3 h-3 border-t border-l border-blue-500/30 rounded-tl-md"></div>
+                    <div class="absolute bottom-8 right-8 w-3 h-3 border-b border-r border-blue-500/30 rounded-br-md"></div>
+                    <div class="absolute top-10 right-10 scale-[0.25] opacity-20 group-hover:opacity-40 transition-opacity">
+                        <div class="system-node"></div>
+                    </div>
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 overflow-hidden shadow-2xl relative group-hover:scale-110 transition-transform duration-500 p-1 backdrop-blur-xl">
+                            <img src={`/images/avatar-1.png`} alt={t.name} class="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100" />
+                        </div>
+                        <div>
+                            <h3 class="font-black text-xl text-white tracking-tighter uppercase">{t.name}</h3>
+                            <p class="font-mono text-[9px] text-blue-400 uppercase tracking-widest mt-1 font-black">{t.role}</p>
+                        </div>
+                    </div>
+                    <div class="relative flex-grow">
+                        <div class="absolute -top-4 -left-4 text-7xl font-black text-blue-500/10 group-hover:text-blue-500/20 transition-colors pointer-events-none">"</div>
+                        <p class="text-lg text-slate-400 font-medium leading-relaxed tracking-tight relative z-10 group-hover:text-slate-200 transition-colors">
+                            {t.quote}
+                        </p>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-white/5 flex justify-between items-center group-hover:border-blue-500/20 transition-colors">
+                        <span class="font-mono text-[9px] uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
+                             <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_#3b82f6]"></span>
+                             Feedback Verificado_
+                        </span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  @keyframes marquee-slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee-slide {
+    animation: marquee-slide 60s linear infinite;
+    will-change: transform;
+  }
+</style>

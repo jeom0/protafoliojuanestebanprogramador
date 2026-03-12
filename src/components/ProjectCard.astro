@@ -1,0 +1,54 @@
+---
+interface Props {
+  project: {
+    title: string;
+    category: string;
+    image: string;
+    link?: string;
+  };
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<div class="project-card-v12 group relative w-full overflow-hidden reveal-up cursor-pointer">
+  <a href={project.link || "#"} class="block relative w-full aspect-[4/3] bg-[#111] overflow-hidden rounded-[2.5rem] border border-white/[0.08] hover:border-[#00FF88]/40 transition-all duration-700">
+    <img 
+      src={project.image} 
+      alt={project.title} 
+      class="w-full h-full object-cover grayscale opacity-30 transition-all duration-1000 scale-100 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+    />
+    
+    <!-- Clean Overlay Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700"></div>
+    
+    <!-- Instant Hover Reveal -->
+    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="w-20 h-20 rounded-full bg-[#00FF88] text-black flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 ease-expo">
+            <svg viewBox="0 0 24 24" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Info Overlay (Snappy & Clean) -->
+    <div class="absolute bottom-0 left-0 p-12 w-full">
+        <div class="flex items-center gap-4 mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+            <div class="w-8 h-[1px] bg-[#00FF88]"></div>
+            <span class="font-mono text-[#00FF88] text-[9px] uppercase font-bold tracking-[0.4em]">
+                {project.category}
+            </span>
+        </div>
+        <h3 class="font-heading text-4xl md:text-5xl text-white uppercase tracking-tighter leading-[0.85] translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+            {project.title}
+        </h3>
+    </div>
+  </a>
+</div>
+
+<style>
+  .ease-expo {
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+</style>

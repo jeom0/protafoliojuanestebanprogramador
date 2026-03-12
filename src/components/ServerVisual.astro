@@ -1,0 +1,49 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = "DATA_LOG_V5" } = Astro.props;
+---
+
+<div class="server-visual p-6 border border-white/10 bg-black/20 backdrop-blur-sm font-mono text-[8px] relative overflow-hidden group">
+    <div class="flex justify-between items-center text-[#00FF88] mb-4">
+        <span class="tracking-widest uppercase">{title}</span>
+        <div class="flex gap-1">
+            <div class="w-1.5 h-1.5 bg-[#00FF88] rounded-full animate-pulse"></div>
+            <div class="w-1.5 h-1.5 bg-white/20 rounded-full"></div>
+        </div>
+    </div>
+    
+    <div class="space-y-3 opacity-40 group-hover:opacity-80 transition-opacity">
+        <div class="w-full h-1 bg-white/5 relative overflow-hidden">
+            <div class="absolute inset-y-0 left-0 bg-[#00FF88] w-2/3 animate-progress-fast"></div>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+            {[...Array(8)].map(() => (
+                <div class="h-4 border border-white/10 bg-white/5"></div>
+            ))}
+        </div>
+        <div class="text-white/40">
+            [SYS] INITIALIZING_BUFFER...<br/>
+            [SYS] SYNCING_REPLICATED_NODES...<br/>
+            [SYS] HEAL_CHECK: OK
+        </div>
+    </div>
+
+    <!-- Background Grid Sub-effect -->
+    <div class="absolute inset-0 z-[-1] opacity-5 bg-grid-small pointer-events-none"></div>
+</div>
+
+<style>
+    .bg-grid-small {
+        background-image: radial-gradient(#00FF88 0.5px, transparent 0.5px);
+        background-size: 10px 10px;
+    }
+    @keyframes progress-fast {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    .animate-progress-fast {
+        animation: progress-fast 2s linear infinite;
+    }
+</style>
