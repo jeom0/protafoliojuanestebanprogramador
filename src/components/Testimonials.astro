@@ -1,235 +1,149 @@
 ---
 const testimonials = [
   {
-    quote: "Working with Juan was an absolutely transformative experience for our backend infrastructure.",
+    quote: "Working with Juan was an absolutely transformative experience for our backend infrastructure. Performance increased by exactly 300%.",
     name: "CARLOS MENDOZA",
     company: "TechVentures",
   },
   {
-    quote: "The n8n automations Juan built saved us hundreds of hours every single month. Incredible work.",
+    quote: "The n8n automations Juan built saved us hundreds of hours every single month. Incredible work and flawless delivery.",
     name: "ANDRÉS GÓMEZ",
     company: "ConsultGroup",
   },
   {
-    quote: "Clean architecture, zero latency, zero failures. Genuinely one of the best engineers I've worked with.",
+    quote: "Clean architecture, zero latency, zero failures. Genuinely one of the best software engineers I've worked with.",
     name: "MARÍA FERNANDA R.",
     company: "DataSystems",
+  },
+  {
+    quote: "An absolute professional. The entire delivery was ahead of schedule and the code quality was simply unmatched.",
+    name: "JORGE LUIS S.",
+    company: "InnovateLabs",
   }
 ];
-let activeIndex = 0;
 ---
 
-<section id="testimonios" class="testimonials-section">
-
-  <!-- Giant Background Title -->
-  <div class="testimonials-bg-text" aria-hidden="true">
-    <span>CLIENTES FELICES</span>
-    <span>CLIENTES FELICES</span>
+<section id="testimonios-wrapper" class="relative w-full bg-[#f8fafc] overflow-hidden" style="min-height: 100vh;">
+  
+  <!-- Massive Background Parallax Text -->
+  <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none overflow-hidden select-none z-0">
+    <h2 data-gsap="test-bg-text" class="font-heading uppercase text-black font-black whitespace-nowrap" style="font-size: clamp(100px, 25vw, 400px); letter-spacing: -0.05em;">
+      CLIENTES FELICES. CLIENTES FELICES.
+    </h2>
   </div>
 
-  <!-- Small label -->
-  <p class="testimonials-label">TESTIMONIOS</p>
+  <div id="testimonios-pin" class="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center z-10" style="perspective: 1500px;">
+    
+    <!-- Section Label -->
+    <p class="absolute top-[10%] md:top-[15%] text-center w-full font-sans text-[10px] font-black uppercase tracking-[0.3em] text-[#0066ff]">
+      TESTIMONIOS
+    </p>
 
-  <!-- Central Floating Card -->
-  <div class="testimonials-card-wrapper">
-    <div id="testimonial-card" class="testimonials-card">
-      <svg width="40" height="32" viewBox="0 0 40 32" fill="none" class="quote-mark">
-        <path d="M0 32V20.267C0 13.333 1.778 8.089 5.333 4.444 8.889 0.8 13.956 -0.444 20.444 0.133V6.222C17.067 6.489 14.489 7.6 12.711 9.556 10.933 11.467 10.044 14.044 10.044 17.244H17.244V32H0ZM22.756 32V20.267C22.756 13.333 24.533 8.089 28.089 4.444 31.644 0.8 36.711 -0.444 43.2 0.133V6.222C39.822 6.489 37.244 7.6 35.467 9.556 33.689 11.467 32.8 14.044 32.8 17.244H40V32H22.756Z" fill="#000" opacity="0.08"/>
-      </svg>
+    <!-- Horizontal Scroll Container -->
+    <div id="test-scroll-container" class="flex items-center gap-[10vw] px-[30vw] md:px-[40vw] h-full w-max">
       
-      <p id="testimonial-quote" class="testimonial-quote">
-        "{testimonials[0].quote}"
-      </p>
+      {testimonials.map((t, i) => (
+        <div class="test-card w-[85vw] md:w-[60vw] max-w-[800px] bg-white rounded-3xl p-8 md:p-16 flex flex-col gap-8 md:gap-12 relative" style="transform-style: preserve-3d; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 40px 100px rgba(0,0,0,0.08);">
+          
+          <svg width="40" height="32" viewBox="0 0 40 32" fill="none" class="absolute top-8 left-8 md:top-12 md:left-12 opacity-10">
+            <path d="M0 32V20.267C0 13.333 1.778 8.089 5.333 4.444 8.889 0.8 13.956 -0.444 20.444 0.133V6.222C17.067 6.489 14.489 7.6 12.711 9.556 10.933 11.467 10.044 14.044 10.044 17.244H17.244V32H0ZM22.756 32V20.267C22.756 13.333 24.533 8.089 28.089 4.444 31.644 0.8 36.711 -0.444 43.2 0.133V6.222C39.822 6.489 37.244 7.6 35.467 9.556 33.689 11.467 32.8 14.044 32.8 17.244H40V32H22.756Z" fill="#000"/>
+          </svg>
 
-      <div class="testimonial-author">
-        <strong id="testimonial-name">{testimonials[0].name}</strong>
-        <span id="testimonial-company">{testimonials[0].company}</span>
-      </div>
-    </div>
-
-    <!-- Navigation Dots -->
-    <div class="testimonials-dots">
-      {testimonials.map((_, i) => (
-        <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Testimonial ${i+1}`}></button>
+          <p class="font-heading text-2xl md:text-5xl lg:text-[4vw] leading-[1.1] font-black text-black tracking-tighter uppercase relative z-10 pl-4 md:pl-16">
+            "{t.quote}"
+          </p>
+          
+          <div class="flex flex-col items-end w-full border-t border-black/10 pt-6 mt-auto">
+            <span class="font-sans text-xs md:text-sm font-black uppercase tracking-widest text-black">{t.name}</span>
+            <span class="font-sans text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-[#0066ff] mt-1">{t.company}</span>
+          </div>
+        </div>
       ))}
+
     </div>
   </div>
-
 </section>
 
-<style>
-  .testimonials-section {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #F0F4FF;
-    overflow: hidden;
-    padding: 80px 20px;
-  }
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
 
-  .testimonials-bg-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-    gap: 60px;
-    white-space: nowrap;
-    animation: scroll-left 18s linear infinite;
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById('testimonios-wrapper');
+    const pin = document.getElementById('testimonios-pin');
+    const container = document.getElementById('test-scroll-container');
+    const cards = gsap.utils.toArray('.test-card');
 
-  .testimonials-bg-text span {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 900;
-    font-size: clamp(80px, 18vw, 200px);
-    color: #000;
-    text-transform: uppercase;
-    letter-spacing: -0.04em;
-    opacity: 0.06;
-    flex-shrink: 0;
-  }
+    if (!wrapper || !pin || !container || cards.length === 0) return;
 
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+    // The total distance to scroll horizontally
+    let scrollWidth = container.scrollWidth - window.innerWidth;
 
-  .testimonials-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: rgba(0,0,0,0.4);
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .testimonials-card-wrapper {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    max-width: 600px;
-    width: 100%;
-  }
-
-  .testimonials-card {
-    background: white;
-    border-radius: 24px;
-    padding: 48px;
-    box-shadow: 0 20px 80px rgba(0,0,0,0.08), 0 4px 20px rgba(0,0,0,0.04);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 24px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
-  .quote-mark {
-    flex-shrink: 0;
-  }
-
-  .testimonial-quote {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(16px, 2.5vw, 22px);
-    font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  .testimonial-author {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    width: 100%;
-  }
-
-  .testimonial-author strong {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #000;
-  }
-
-  .testimonial-author span {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(0,0,0,0.4);
-  }
-
-  .testimonials-dots {
-    display: flex;
-    gap: 10px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.2);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    padding: 0;
-  }
-
-  .dot.active {
-    background: #000;
-    width: 24px;
-    border-radius: 4px;
-  }
-</style>
-
-<script is:inline define:vars={{ testimonials }}>
-  let current = 0;
-  const card = document.getElementById('testimonial-card');
-  const quote = document.getElementById('testimonial-quote');
-  const name = document.getElementById('testimonial-name');
-  const company = document.getElementById('testimonial-company');
-  const dots = document.querySelectorAll('.dot');
-
-  function setTestimonial(index) {
-    current = index;
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(10px)';
-    setTimeout(() => {
-      quote.textContent = '"' + testimonials[index].quote + '"';
-      name.textContent = testimonials[index].name;
-      company.textContent = testimonials[index].company;
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
-    }, 300);
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === index);
+    // Horizontal Scroll Tween
+    const tl = gsap.to(container, {
+      x: -scrollWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapper,
+        pin: pin,
+        start: "center center",
+        end: () => `+=${scrollWidth}`,
+        scrub: 1,
+        anticipatePin: 1
+      }
     });
-  }
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => setTestimonial(i));
+    // 3D Rotation Effect for Cards during scroll
+    cards.forEach((card: any) => {
+      gsap.fromTo(card, 
+        {
+          rotationY: 45,
+          scale: 0.8,
+          opacity: 0.2
+        },
+        {
+          rotationY: -45,
+          scale: 0.8,
+          opacity: 0.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: tl,
+            start: "left right",
+            end: "right left",
+            scrub: true,
+            onUpdate: (self) => {
+              // Highlight the card when it is near the center
+              const progress = self.progress;
+              // Gaussian bump: 1 at 0.5, lower at the edges
+              const centerDist = Math.abs(progress - 0.5);
+              const scale = 0.8 + (1 - centerDist * 2) * 0.2; // peaks at 1.0
+              const opacity = 0.2 + (1 - centerDist * 2) * 0.8; // peaks at 1.0
+              const rotY = (0.5 - progress) * 90; // rotates from positive to negative
+              
+              gsap.set(card, {
+                rotationY: Math.max(-45, Math.min(45, rotY)),
+                scale: Math.max(0.8, Math.min(1, scale)),
+                opacity: Math.max(0.2, Math.min(1, opacity)),
+                backgroundColor: centerDist < 0.2 ? '#ffffff' : '#f0f0f0'
+              });
+            }
+          }
+        }
+      );
+    });
+
+    // Background Text Parallax
+    gsap.to('[data-gsap="test-bg-text"]', {
+      xPercent: -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
   });
-
-  // Auto-rotate every 5 seconds
-  setInterval(() => {
-    setTestimonial((current + 1) % testimonials.length);
-  }, 5000);
 </script>

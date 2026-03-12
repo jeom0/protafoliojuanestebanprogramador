@@ -1,56 +1,60 @@
 ---
 ---
 
-<section id="contacto" class="bg-white text-black pt-16 pb-8 px-4 flex flex-col items-center justify-between min-h-[40vh] relative overflow-hidden">
+<section id="contacto" class="bg-[#f8fafc] w-full min-h-[70vh] flex flex-col items-center justify-between pt-32 pb-8 px-4 md:px-12 border-t border-black/10 relative overflow-hidden">
   
-  <div class="w-full max-w-6xl mx-auto flex flex-col items-center justify-center relative z-10 mb-12">
+  <div class="w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center flex-1 text-center relative z-10">
     
-    <!-- Pill Footer Banner -->
-    <div class="w-full h-[25vh] md:h-[30vh] rounded-[100px] overflow-hidden relative shadow-2xl flex items-center justify-center cursor-pointer" id="footer-pill-btn">
-      <!-- Background Image -->
-      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80" alt="Work Background" class="absolute inset-0 w-full h-full object-cover blur-[2px] brightness-50" />
-      
-      <!-- Overlay Text -->
-      <div class="relative z-10 text-center px-6">
-        <h2 class="font-heading text-4xl md:text-6xl lg:text-[80px] font-black text-white uppercase tracking-tighter leading-[0.85] shadow-black drop-shadow-2xl">
-          ARMEMOS <br/>
-          TU SISTEMA <br/>
-          JUNTOS
-        </h2>
-      </div>
-    </div>
+    <p class="font-sans text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#0066ff] mb-8">
+      ¿TIENES UNA IDEA?
+    </p>
+
+    <h2 class="font-heading text-[10vw] md:text-[8vw] lg:text-[120px] font-black text-black uppercase tracking-tighter leading-[0.85] mb-12 hover:scale-105 transition-transform duration-700 cursor-pointer" id="giant-contact-btn">
+      CONSTRUYAMOS<br/>
+      ALGO GENIAL.
+    </h2>
+
+    <a href="mailto:jeom.245@gmail.com" class="px-8 py-4 rounded-full bg-black text-white font-sans text-xs uppercase font-black tracking-widest hover:bg-[#0066ff] transition-colors shadow-2xl flex items-center gap-3">
+      ENVIAR CORREO
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
 
   </div>
 
-  <!-- Bottom Bar Links -->
-  <div class="w-full flex flex-col items-center gap-8 relative z-10 text-center">
-    <div class="flex flex-wrap justify-center gap-6 md:gap-8 font-sans text-[10px] md:text-xs font-bold uppercase tracking-widest text-black">
+  <!-- Absolute Bottom Bar -->
+  <div class="w-full max-w-[1400px] mt-32 pt-8 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+    
+    <span class="font-sans text-[10px] font-bold text-black/40 uppercase tracking-widest">
+      &copy; 2026 JUAN ESTEBAN OSPINA. ALL RIGHTS RESERVED.
+    </span>
+
+    <div class="flex items-center gap-8 font-sans text-[10px] font-bold uppercase tracking-widest text-black">
       <a href="https://linkedin.com" target="_blank" class="hover:text-[#0066ff] transition-colors">LINKEDIN</a>
       <a href="https://github.com" target="_blank" class="hover:text-[#0066ff] transition-colors">GITHUB</a>
       <a href="https://instagram.com" target="_blank" class="hover:text-[#0066ff] transition-colors">INSTAGRAM</a>
       <button id="btn-whatsapp-footer2" class="hover:text-[#25D366] transition-colors uppercase cursor-pointer">WHATSAPP</button>
     </div>
-    
-    <span class="font-sans text-[10px] md:text-xs font-medium text-black/60">
-      Juan Esteban Ospina &copy; 2026. Gracias por pasarte.
-    </span>
+
   </div>
+
+  <!-- Background Glow -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-[#0066ff]/5 blur-[120px] rounded-[100%] pointer-events-none z-0"></div>
 
 </section>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
       const wppBtn2 = document.getElementById('btn-whatsapp-footer2');
-      const pillBtn = document.getElementById('footer-pill-btn');
+      const giantBtn = document.getElementById('giant-contact-btn');
       
       const fireWpp = () => {
           const phoneNumber = '573245638720';
-          const message = "Hola Juan Esteban, quisiera cotizar la arquitectura o backend de un nuevo proyecto.";
+          const message = "Hola Juan Esteban, me encantó tu portafolio y quisiera cotizar un proyecto.";
           const encodedMessage = encodeURIComponent(message);
           window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
       };
 
       if (wppBtn2) wppBtn2.addEventListener('click', fireWpp);
-      if (pillBtn) pillBtn.addEventListener('click', fireWpp);
+      if (giantBtn) giantBtn.addEventListener('click', fireWpp);
   });
 </script>

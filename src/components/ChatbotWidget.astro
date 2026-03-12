@@ -171,39 +171,70 @@
   /* ── Messages ── */
   #chat-body {
     overflow-y: auto;
-    padding: 16px;
+    padding: 20px 16px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    background: #e5ddd5; /* WhatsApp chat background color */
   }
-  .msg-row { display: flex; }
+  .msg-row { display: flex; width: 100%; margin-bottom: 4px; }
   .msg-row.bot { justify-content: flex-start; }
   .msg-row.user { justify-content: flex-end; }
+  
   .msg-bubble {
-    max-width: 82%;
+    max-width: 80%;
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 450;
-    line-height: 1.55;
-    padding: 10px 14px;
-    border-radius: 16px;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 8px 12px;
+    position: relative;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   }
+  
   .msg-bubble.bot {
-    background: #fff;
+    background: #ffffff;
     color: #111;
-    border-radius: 4px 16px 16px 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border-radius: 0 8px 8px 8px;
+    margin-left: 8px;
   }
+  /* Bot WhatsApp Tail */
+  .msg-bubble.bot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-right: 8px solid #ffffff;
+    border-bottom: 10px solid transparent;
+  }
+
   .msg-bubble.user {
-    background: #000;
-    color: #fff;
-    border-radius: 16px 4px 16px 16px;
+    background: #dcf8c6; /* WhatsApp light green */
+    color: #111;
+    border-radius: 8px 0 8px 8px;
+    margin-right: 8px;
   }
+  /* User WhatsApp Tail */
+  .msg-bubble.user::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-left: 8px solid #dcf8c6;
+    border-bottom: 10px solid transparent;
+  }
+
   .msg-bubble.typing span {
     display: inline-block;
-    width: 5px; height: 5px;
+    width: 6px; height: 6px;
     border-radius: 50%;
-    background: #aaa;
+    background: #888;
     margin: 0 2px;
     animation: blink 1.2s infinite;
   }
