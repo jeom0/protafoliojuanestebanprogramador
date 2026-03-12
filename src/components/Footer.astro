@@ -2,44 +2,51 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-20 relative overflow-hidden border-t" style="background:#0a0e1b; border-color:rgba(255,255,255,0.06);">
+<footer id="contacto" class="py-20 relative overflow-hidden border-t" style="background:#0a0e1b; border-color:rgba(255,255,255,0.06);">
   <!-- Subtle glow in footer -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none rounded-full blur-[100px] opacity-20" style="background:radial-gradient(ellipse, #0066ff 0%, transparent 70%);"></div>
   <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] pointer-events-none" style="background:radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%);"></div>
   
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-16 mb-16 reveal-on-scroll">
-      <!-- Brand -->
-      <div class="max-w-xl">
-          <div class="font-heading text-4xl uppercase tracking-tighter mb-4 font-black" style="color:#f1f5f9;">
-            OSPINA<span style="color:#60a5fa;">_DEV</span>
+  <div class="container mx-auto px-4 md:px-8 max-w-[1400px] relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-start lg:items-end gap-16 mb-16 lg:mb-24">
+      
+      <!-- Brand & Mission -->
+      <div class="max-w-2xl">
+          <div class="font-heading text-5xl md:text-7xl uppercase tracking-tighter mb-6 font-black text-white">
+            JUAN ESTEBAN<br/>
+            <span class="text-[#0066ff]">OSPINA.</span>
           </div>
-          <p class="text-lg font-medium uppercase tracking-[0.15em] leading-snug" style="color:#334155;">
-              Ingeniería backend de alto rendimiento.<br/>Laravel · Node.js · Bases de Datos · Asesoría.
+          <p class="text-lg md:text-xl font-medium tracking-normal leading-relaxed text-[#94a3b8] max-w-xl">
+              Ingeniería backend de alto rendimiento. Arquitecturas escalables, automatización de sistemas y soluciones de software nivel empresarial.
           </p>
       </div>
 
-      <!-- Links -->
-      <div class="flex flex-wrap gap-12 lg:gap-24">
-          <div class="space-y-4">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-[0.4em]" style="color:#3b82f6;">NODOS_SOCIALES_</div>
-              <ul class="space-y-2 font-heading text-xl italic font-black">
-                  <li><a href="#" class="uppercase transition-colors duration-300" style="color:#475569;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='#475569'">LinkedIn //</a></li>
-                  <li><a href="#" class="uppercase transition-colors duration-300" style="color:#475569;" onmouseover="this.style.color='#60a5fa'" onmouseout="this.style.color='#475569'">GitHub //</a></li>
+      <!-- Links Grid -->
+      <div class="flex flex-col sm:flex-row gap-12 sm:gap-24">
+          <div class="space-y-6">
+              <div class="font-sans text-[10px] font-black uppercase tracking-[0.3em] text-[#0066ff]">REDES & CONTACTO</div>
+              <ul class="space-y-4 font-heading text-2xl font-black">
+                  <li><a href="#" class="uppercase text-white hover:text-[#0066ff] transition-colors duration-300 flex items-center gap-2 group">LINKEDIN <svg class="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a></li>
+                  <li><a href="#" class="uppercase text-white hover:text-[#0066ff] transition-colors duration-300 flex items-center gap-2 group">GITHUB <svg class="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a></li>
+                  <li><a href="mailto:hello@ospina.dev" class="uppercase text-white hover:text-[#0066ff] transition-colors duration-300 flex items-center gap-2 group">EMAIL <svg class="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a></li>
               </ul>
           </div>
-          <div class="space-y-4">
-              <div class="font-mono text-[9px] font-bold uppercase tracking-[0.4em]" style="color:#3b82f6;">PROTOCOLO_</div>
-              <div class="font-heading text-xl font-black uppercase tracking-tighter" style="color:#1e3a5f;">BACKEND ENGINEER // COLOMBIA</div>
+          <div class="space-y-6">
+              <div class="font-sans text-[10px] font-black uppercase tracking-[0.3em] text-[#0066ff]">UBICACIÓN</div>
+              <div class="font-heading text-2xl font-black uppercase tracking-tighter text-[#94a3b8]">
+                  MEDELLÍN,<br/>COLOMBIA <br/>
+                  <span class="text-white text-lg mt-2 block">AVAILABLE WORLDWIDE</span>
+              </div>
           </div>
       </div>
     </div>
 
-    <!-- Bottom bar -->
-    <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-8 font-mono text-[9px] font-bold uppercase tracking-[0.4em] reveal-on-scroll delay-100" style="border-top:1px solid rgba(255,255,255,0.05);">
-        <div style="color:#1e3a5f;">© {currentYear} JUAN ESTEBAN OSPINA MARÍN. ALL SYSTEMS REGISTERED_</div>
-        <div class="flex items-center gap-4">
-            <span class="animate-pulse" style="color:#334155;">BACKEND SYSTEMS ONLINE // COLOMBIA</span>
-            <div class="w-2 h-2 rounded-full" style="background:#3b82f6; box-shadow:0 0 10px rgba(59,130,246,0.6);"></div>
+    <!-- Bottom Status Bar -->
+    <div class="pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 font-sans text-[10px] font-black uppercase tracking-[0.2em] border-t border-white/10 text-[#64748b]">
+        <div>© {currentYear} JUAN ESTEBAN OSPINA. ALL RIGHTS RESERVED.</div>
+        <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" style="box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);"></div>
+            <span class="text-white">AVAILABLE FOR FREELANCE WORK</span>
         </div>
     </div>
   </div>
