@@ -193,10 +193,13 @@
   }
   
   .msg-bubble.bot {
-    background: #ffffff;
-    color: #111;
+    background: #ffffff !important;
+    color: #111 !important;
     border-radius: 0 8px 8px 8px;
     margin-left: 8px;
+  }
+  .msg-bubble.bot * {
+    color: #111 !important;
   }
   /* Bot WhatsApp Tail */
   .msg-bubble.bot::before {
@@ -212,10 +215,13 @@
   }
 
   .msg-bubble.user {
-    background: #dcf8c6; /* WhatsApp light green */
-    color: #111;
+    background: #dcf8c6 !important; /* WhatsApp light green */
+    color: #111 !important;
     border-radius: 8px 0 8px 8px;
     margin-right: 8px;
+  }
+  .msg-bubble.user * {
+    color: #111 !important;
   }
   /* User WhatsApp Tail */
   .msg-bubble.user::after {
@@ -373,23 +379,39 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isMobile()) { win.style.top = ''; win.style.height = ''; }
   }
 
-  fab.addEventListener('click', () => isOpen ? close() : open());
-  closeBtn.addEventListener('click', close);
-
   function startIdle() {
     clearTimeout(idleTimer);
     if (idleFired) return;
     idleTimer = setTimeout(() => {
       if (!isOpen || idleFired) return;
       idleFired = true;
-      addBot('Parece que te has ido 👋 Fue un placer atenderte. Puedes contactar a Juan cuando quieras:', [
-        { label: 'WhatsApp', href: 'https://wa.me/573245638720' },
-        { label: 'Correo', href: 'mailto:jeom.245@gmail.com' },
-      ]);
-    }, 45000);
+      addBot('Parece que llevas un rato sin escribir 👋 Voy a cerrar el chat por ahora. Si necesitas algo, estaré aquí.', []);
+      setTimeout(() => {
+        close();
+      }, 3000); // Close automatically after 3 seconds
+    }, 300000); // 5 minutes = 300,000 ms
   }
 
-  input.addEventListener('input', () => { clearTimeout(idleTimer); startIdle(); });
+  function sendSurvey() {
+    addBot('¡Hola de nuevo! Antes de continuar, ¿qué tal te ha parecido la experiencia usando este chatbot?', [
+      { label: 'Excelente 🤩', href: '#' },
+      { label: 'Normal 👍', href: '#' },
+      { label: 'Podría mejorar 🤔', href: '#' }
+    ]);
+  }
+
+  fab.addEventListener('click', () => {
+    if (isOpen) {
+      close();
+    } else {
+      open();
+      if (idleFired) {
+        // If they return after being idled out, ask for feedback
+        idleFired = false; 
+        setTimeout(sendSurvey, 500);
+      }
+    }
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -452,14 +474,32 @@ document.addEventListener('DOMContentLoaded', () => {
     row.className = 'msg-row bot';
     let actionsHtml = '';
     if (actions.length) {
+      // Changed to buttons if href is '#', else links
       actionsHtml = '<div class="msg-actions">' +
-        actions.map(a => `<a href="${a.href}" target="_blank" class="msg-action-btn">${a.label}</a>`).join('') +
+        actions.map(a => {
+          if (a.href === '#') return `<button type="button" class="msg-action-btn survey-btn">${a.label}</button>`;
+          return `<a href="${a.href}" target="_blank" class="msg-action-btn">${a.label}</a>`;
+        }).join('') +
         '</div>';
     }
     const html = esc(text).replace(/\n/g, '<br>');
     row.innerHTML = `<div class="msg-bubble bot">${html}${actionsHtml}</div>`;
     body.appendChild(row);
     body.scrollTop = body.scrollHeight;
+
+    // Attach survey button logic
+    row.querySelectorAll('.survey-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const val = e.target.innerText;
+        addUser(val);
+        setTimeout(() => addBot('¡Gracias por tu feedback! 🙌 ¿En qué más te puedo ayudar hoy?'), 600);
+        // Disable buttons after click
+        row.querySelectorAll('.survey-btn').forEach(b => {
+           b.style.pointerEvents = 'none';
+           b.style.opacity = '0.5';
+        });
+      });
+    });
   }
 
   function addTyping() {
