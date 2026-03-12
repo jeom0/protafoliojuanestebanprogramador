@@ -221,8 +221,8 @@ import { projects } from '../data/projects';
       scrollTrigger: {
         trigger: '#proyectos',
         start: 'top top',
-        end: () => `+=${(cards.length - 1) * 40}vh`,
-        scrub: 1,
+        end: () => `+=${(cards.length - 1) * 80}vh`, // Expanded slightly for breathing room
+        scrub: 1.5, // 1.5s delay for ultra smooth dampening
         pin: pinContainer,
         anticipatePin: 1,
         onUpdate: (self) => {

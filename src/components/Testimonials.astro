@@ -108,14 +108,17 @@ const testimonials = [
         trigger: wrapper,
         pin: pin,
         start: "center center",
-        end: () => `+=${scrollWidth}`,
-        scrub: 1,
+        end: () => `+=${scrollWidth * 1.5}`, // Extend duration to slow down card speed
+        scrub: 0.8, // Add smooth dampening for premium feel
         anticipatePin: 1
       }
     });
 
     // 3D Rotation Effect for Cards during scroll
-    cards.forEach((card: any) => {
+    cards.forEach((card: any, i) => {
+      // Calculate card position relative to full container width
+      const cardCenter = (i + 0.5) / cards.length;
+      
       gsap.fromTo(card, 
         {
           rotationY: 45,
@@ -134,13 +137,11 @@ const testimonials = [
             end: "right left",
             scrub: true,
             onUpdate: (self) => {
-              // Highlight the card when it is near the center
               const progress = self.progress;
-              // Gaussian bump: 1 at 0.5, lower at the edges
               const centerDist = Math.abs(progress - 0.5);
-              const scale = 0.8 + (1 - centerDist * 2) * 0.2; // peaks at 1.0
-              const opacity = 0.2 + (1 - centerDist * 2) * 0.8; // peaks at 1.0
-              const rotY = (0.5 - progress) * 90; // rotates from positive to negative
+              const scale = 0.8 + (1 - centerDist * 2) * 0.2; 
+              const opacity = 0.2 + (1 - centerDist * 2) * 0.8; 
+              const rotY = (0.5 - progress) * 90; 
               
               gsap.set(card, {
                 rotationY: Math.max(-45, Math.min(45, rotY)),
@@ -162,7 +163,7 @@ const testimonials = [
         trigger: wrapper,
         start: "top bottom",
         end: "bottom top",
-        scrub: true
+        scrub: 1
       }
     });
   });
