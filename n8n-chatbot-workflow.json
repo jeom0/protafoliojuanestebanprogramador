@@ -1,111 +1,226 @@
 {
-    "name": "Portfolio AI Assistant",
-    "nodes": [
-        {
-            "parameters": {
-                "path": "portfolio-chat",
-                "responseMode": "lastNode",
-                "options": {}
-            },
-            "id": "e8a1b2c3-1111-4fa3-b123-5e9a3b2b9a1a",
-            "name": "Webhook",
-            "type": "n8n-nodes-base.webhook",
-            "typeVersion": 1,
-            "position": [
-                200,
-                300
-            ],
-            "webhookId": "PORTFOLIO-AI-WEBHOOK"
+  "name": "Portfolio Grok AI Agent (Calendar & Email)",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "portfolio-chat",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "e8a1b2c3-1111-4fa3-b123-5e9a3b2b9a1a",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "PORTFOLIO-AI-WEBHOOK"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {
+          "systemMessage": "Eres el asistente A.I. oficial de Juan Esteban Ospina, un Ingeniero de Software experto en integraciones n8n y Backend. Estás impulsado por Grok (xAI).\n\nOBJETIVOS:\n1. Responder preguntas sobre el portafolio, precios y servicios de Juan Esteban.\n2. AGENDAR REUNIONES: Tienes acceso a Google Calendar. Si el usuario desea agendar, pregúntale nombre, correo, fecha y hora, y usa la herramienta Calendar para crear el evento.\n3. ENVIAR CORREOS: Tienes acceso a enviar correos. Si el usuario quiere dejar un mensaje formal, enviarle una cotización, o comunicarse, pídeles su correo y usa la herramienta Email para enviárselo al usuario y copiar a Juan (jeom.245@gmail.com).\n\nTono: Altamente profesional, rápido y preciso."
+        }
+      },
+      "id": "f5d7c8e9-2222-4a12-8888-abcdef123456",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "grok-beta",
+        "options": {
+          "temperature": 0.5
+        }
+      },
+      "id": "xai-lm-node-9999",
+      "name": "xAI (Grok) Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatXai",
+      "typeVersion": 1,
+      "position": [
+        460,
+        500
+      ],
+      "credentials": {
+        "xAiApi": {
+          "id": "YOUR_XAI_CREDENTIAL_ID",
+          "name": "xAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "calendar": {
+          "__rl": true,
+          "value": "primary",
+          "mode": "list",
+          "cachedResultName": "Primary Calendar"
         },
-        {
-            "parameters": {
-                "model": "gpt-4o-mini",
-                "messages": {
-                    "messageValues": [
-                        {
-                            "message": "Eres el asistente virtual personal de Juan Esteban Ospina, un ingeniero de software especializado en Backend, Arquitecturas Escalables y Automatizaciones con n8n. Tu trabajo es hablar con los clientes que visitan su portafolio.\n\nReglas:\n1. Eres amable, directo y extremadamente profesional.\n2. Si piden cotizaciones o preguntan sobre precios o tarifas, infórmales de estas opciones exactas:\n   - Paquete Emprendedor (Landing básica): $700.000 COP\n   - Paquete Negocio Digital (3 secciones): $1.400.000 COP\n   - Paquete Empresa Pro (5 secciones + CMS): $2.500.000 COP\n   - Sitios Web Empresariales Completos: $2.000.000 a $3.800.000 COP\n   - Aplicaciones Web/Sistemas y Apps Móviles: Desde $4.000.000 COP\n   - Asesorías/Consultorías: Desde $250.000 COP x sesión\n3. Siempre invítalos a contactar a Juan usando el botón directo de WhatsApp o correo electrónico al final de la página.\n4. Responde de forma concisa, amigable, no más de 3 o 4 oraciones."
-                        },
-                        {
-                            "role": "user",
-                            "message": "={{ $json.body.message }}"
-                        }
-                    ]
-                },
-                "options": {
-                    "temperature": 0.7
-                }
-            },
-            "id": "f5d7c8e9-2222-4a12-8888-abcdef123456",
-            "name": "OpenAI/ChatGPT",
-            "type": "n8n-nodes-base.openAi",
-            "typeVersion": 1.2,
-            "position": [
-                420,
-                300
-            ],
-            "credentials": {
-                "openAiApi": {
-                    "id": "YOUR_OPENAI_CREDENTIAL_ID",
-                    "name": "OpenAI account"
-                }
+        "start": "={{ $fromAI('start_time') }}",
+        "end": "={{ $fromAI('end_time') }}",
+        "title": "={{ $fromAI('event_title', 'Reunión con Juan Esteban') }}",
+        "options": {
+          "attendees": [
+            "={{ $fromAI('user_email') }}"
+          ]
+        }
+      },
+      "id": "calendar-tool-node",
+      "name": "Google Calendar Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolGoogleCalendar",
+      "typeVersion": 1.1,
+      "position": [
+        620,
+        500
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "YOUR_GCAL_CREDENTIAL",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('user_email') }}",
+        "subject": "={{ $fromAI('email_subject', 'Contacto desde el Portafolio de Juan') }}",
+        "message": "={{ $fromAI('email_body') }}",
+        "options": {
+          "ccList": "jeom.245@gmail.com"
+        }
+      },
+      "id": "gmail-tool-node",
+      "name": "Gmail Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolGmail",
+      "typeVersion": 2,
+      "position": [
+        780,
+        500
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "window-buffer-memory",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1,
+      "position": [
+        320,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "reply",
+              "value": "={{ $json.output }}"
             }
+          ]
         },
-        {
-            "parameters": {
-                "keepOnlySet": true,
-                "values": {
-                    "string": [
-                        {
-                            "name": "reply",
-                            "value": "={{ $json.message.content }}"
-                        }
-                    ]
-                },
-                "options": {}
-            },
-            "id": "a1b2c3d4-3333-4cdf-9876-123456abcdef",
-            "name": "Format Response",
-            "type": "n8n-nodes-base.set",
-            "typeVersion": 2,
-            "position": [
-                640,
-                300
-            ]
-        }
-    ],
-    "pinData": {},
-    "connections": {
-        "Webhook": {
-            "main": [
-                [
-                    {
-                        "node": "OpenAI/ChatGPT",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "OpenAI/ChatGPT": {
-            "main": [
-                [
-                    {
-                        "node": "Format Response",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        }
+        "options": {}
+      },
+      "id": "a1b2c3d4-3333-4cdf-9876-123456abcdef",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        800,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "active": false,
-    "settings": {
-        "executionOrder": "v1"
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "versionId": "ebf664a7-84e0-4ad3-9e45-d04babe9b252",
-    "meta": {
-        "templateCredsSetupCompleted": true
+    "xAI (Grok) Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "id": "AI-Assistant-Template",
-    "tags": []
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "grok-advanced-agent-v1",
+  "id": "Grok-AI-Agent-Template",
+  "tags": []
 }

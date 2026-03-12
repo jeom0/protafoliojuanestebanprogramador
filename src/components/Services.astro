@@ -1,23 +1,51 @@
 ---
 const services = [
-  { title: "BACKEND DEVELOPMENT", info: "Laravel & Node.js" },
-  { title: "SYSTEM ARCHITECTURE", info: "Data & Scaling" },
-  { title: "N8N AUTOMATION", info: "Workflow Design" },
-  { title: "API INTEGRATION", info: "RESTful & Webhooks" }
+  { 
+    title: "BACKEND DEVELOPMENT", 
+    info: "Laravel & Node.js",
+    desc: "Construyo APIs y sistemas de servidor desde cero, optimizados para alto tráfico y baja latencia.",
+    cases: ["Sistemas SaaS", "Plataformas de E-Commerce", "APIs Móviles"]
+  },
+  { 
+    title: "SYSTEM ARCHITECTURE", 
+    info: "Data & Scaling",
+    desc: "Diseño la infraestructura en la nube (AWS) y bases de datos para asegurar alta disponibilidad y resiliencia.",
+    cases: ["Migración a la Nube", "Sistemas de Alta Disponibilidad", "Optimización de Bases de Datos"]
+  },
+  { 
+    title: "N8N AUTOMATION", 
+    info: "Workflow Design",
+    desc: "Automatizo procesos de negocio conectando múltiples herramientas sin esfuerzo y reduciendo costos operativos.",
+    cases: ["Chatbots AI", "Pipelines de Ventas", "Sincronización de ERPs"]
+  },
+  { 
+    title: "API INTEGRATION", 
+    info: "RESTful & Webhooks",
+    desc: "Conecto tu producto con pasarelas de pago, CRMs y cualquier servicio de terceros de forma segura.",
+    cases: ["Pasarelas de Pago", "Sistemas CRM", "Webhooks Personalizados"]
+  }
 ];
 ---
 
 <section id="servicios" class="py-32 relative z-10 w-full bg-[#F2F2F2]">
   <div class="container mx-auto px-4 md:px-8 max-w-[1400px]">
     
+    <!-- Section Label -->
+    <p class="font-sans text-[10px] font-black uppercase tracking-[0.3em] text-[#0066ff] mb-6">ACERCA DE MÍ</p>
+
+    <!-- About Title with Letter-by-Letter Reveal -->
+    <h2 id="about-main-title" class="font-heading text-[12vw] md:text-[10vw] lg:text-[9vw] uppercase font-black text-black tracking-tighter leading-[0.85] mb-16 overflow-hidden">
+        QUIÉN SOY.
+    </h2>
+
     <!-- About Paragraph (DiegoLiv Style) -->
-    <div class="mb-32 max-w-5xl">
+    <div class="mb-32 max-w-5xl" data-gsap="parallax-services">
         <p class="font-heading text-[6vw] md:text-[5vw] leading-[0.9] text-black uppercase tracking-tighter">
             SOY JUAN ESTEBAN OSPINA, INGENIERO DE SOFTWARE ESPECIALIZADO EN LA 
             <span class="text-black/40 italic mix-blend-multiply">CREACIÓN DE ARQUITECTURAS BACKEND ROBUSTAS</span> 
             Y FLUJOS DE AUTOMATIZACIÓN AVANZADOS.
         </p>
-        <div class="mt-12 flex gap-4">
+        <div class="mt-12 flex flex-wrap gap-4">
             <span class="px-6 py-3 rounded-full border border-black/10 text-black font-sans text-xs uppercase font-bold tracking-widest bg-white">MEDELLÍN, COLOMBIA</span>
             <span class="px-6 py-3 rounded-full border border-black/10 text-black font-sans text-xs uppercase font-bold tracking-widest bg-white">AVAILABLE FOR WORK</span>
         </div>
@@ -26,7 +54,7 @@ const services = [
     <!-- Services List -->
     <div class="w-full border-t border-black/10 pt-16">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-            <h2 class="font-heading text-5xl md:text-7xl uppercase font-black text-black tracking-tighter leading-none">
+            <h2 id="services-title" class="font-heading text-5xl md:text-7xl uppercase font-black text-black tracking-tighter leading-none overflow-hidden">
                 MIS ESPECIALIDADES.
             </h2>
             <p class="font-sans text-lg text-black/60 font-medium max-w-sm">
@@ -34,14 +62,45 @@ const services = [
             </p>
         </div>
 
-        <div class="w-full flex flex-col group/list">
-            {services.map((service) => (
-                <div class="group/item flex flex-col md:flex-row justify-between items-start md:items-center py-10 md:py-16 border-b border-black/10 transition-colors duration-500 hover:bg-white cursor-pointer px-4 -mx-4">
-                    <h3 class="font-heading text-4xl sm:text-6xl md:text-[8vw] uppercase font-black text-black tracking-tighter leading-none transition-transform duration-500 group-hover/item:translate-x-4 mix-blend-multiply group-hover/item:text-[#0066ff]">
-                        {service.title}
-                    </h3>
-                    <div class="mt-4 md:mt-0 font-sans text-sm md:text-base text-black/40 uppercase font-bold tracking-widest opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 -translate-x-4 group-hover/item:translate-x-0">
-                        {service.info}
+        <div class="w-full flex flex-col">
+            {services.map((service, index) => (
+                <div class="service-item flex flex-col md:flex-row justify-between items-start border-b border-black/10 transition-colors duration-500 hover:bg-white px-4 -mx-4 cursor-default">
+                    
+                    <div class="w-full flex-1 flex flex-col justify-center relative py-8 md:py-12">
+                        <!-- Main Title (Hover trigger) -->
+                        <div class="flex justify-between items-center w-full">
+                            <h3 class="service-title font-heading text-4xl sm:text-6xl md:text-[6vw] uppercase font-black text-black tracking-tighter leading-[0.9] transition-transform duration-500 mix-blend-multiply">
+                                {service.title}
+                            </h3>
+                            <div class="service-info text-sm font-bold tracking-widest uppercase text-black/40 transition-colors md:hidden">
+                                {service.info}
+                            </div>
+                        </div>
+
+                        <!-- Accordion Content (Reveals purely on hover via CSS) -->
+                        <div class="accordion-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]">
+                            <div class="overflow-hidden">
+                                <div class="accordion-inner pt-8 pb-4 flex flex-col md:flex-row gap-8 md:gap-16 opacity-0 transition-opacity duration-700">
+                                    <div class="md:w-1/2">
+                                        <div class="hidden md:block text-2xl font-heading font-black tracking-tighter uppercase text-[#0066ff] mb-4">
+                                            {service.info}
+                                        </div>
+                                        <p class="text-lg md:text-xl font-medium leading-relaxed font-sans text-black/70">
+                                            {service.desc}
+                                        </p>
+                                    </div>
+                                    <div class="md:w-1/2">
+                                        <p class="text-[10px] font-bold uppercase tracking-widest text-[#0066ff] mb-4">Casos de Uso</p>
+                                        <div class="flex flex-wrap gap-3">
+                                            {services[index].cases.map(useCase => (
+                                                <span class="px-5 py-3 border border-black/10 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest text-black bg-[#F2F2F2] shadow-sm transform transition-transform hover:scale-105">{useCase}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             ))}
@@ -50,3 +109,61 @@ const services = [
 
   </div>
 </section>
+
+<script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Parallax Effect for About Paragraph
+        gsap.to('[data-gsap="parallax-services"]', {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#servicios",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Letter-by-letter reveal for "QUIÉN SOY."
+        const aboutTitle = document.getElementById('about-main-title');
+        if (aboutTitle && (window as any).SplitType) {
+            const split1 = new (window as any).SplitType(aboutTitle, { types: 'chars' });
+            gsap.from(split1.chars, {
+                yPercent: 110, opacity: 0, stagger: 0.05, duration: 0.6, ease: 'power3.out',
+                scrollTrigger: { trigger: aboutTitle, start: 'top 85%' }
+            });
+        }
+
+        // Letter-by-letter reveal for "MIS ESPECIALIDADES."
+        const servTitle = document.getElementById('services-title');
+        if (servTitle && (window as any).SplitType) {
+            const split2 = new (window as any).SplitType(servTitle, { types: 'chars' });
+            gsap.from(split2.chars, {
+                yPercent: 110, opacity: 0, stagger: 0.04, duration: 0.5, ease: 'power3.out',
+                scrollTrigger: { trigger: servTitle, start: 'top 85%' }
+            });
+        }
+    });
+</script>
+<style>
+    /* Pure CSS Hover Implementation for absolute reliability */
+    .service-item:hover .accordion-content {
+        grid-template-rows: 1fr;
+    }
+    .service-item:hover .accordion-inner {
+        opacity: 1;
+        transition-delay: 100ms;
+    }
+    .service-item:hover .service-title {
+        color: #0066ff;
+        transform: translateX(1rem);
+    }
+    .service-item:hover .service-info {
+        color: #0066ff;
+    }
+</style>

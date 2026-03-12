@@ -1,58 +1,53 @@
 ---
-import { siteData } from '../data/site';
-
-const focusItems = [
-  "Automation-first mindset",
-  "Business-driven engineering",
-  "Performance & reliability"
-];
 ---
 
-<section class="py-32 px-6 md:px-12 bg-transparent relative z-10" id="about">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-      <div class="reveal-about">
-        <h2 class="text-xs font-black text-blue-400 uppercase tracking-[0.4em] mb-8 font-mono">01 — Filosofía_</h2>
-        <p class="text-4xl md:text-6xl font-heading font-black leading-[0.9] mb-12 text-transparent bg-clip-text bg-gradient-to-br from-slate-100 to-slate-400 tracking-tighter">
-          Ingeniería de sistemas que <span class="text-blue-500 italic drop-shadow-2xl">no solo funciona</span>, sino que acelera tu ejecución.
-        </p>
-      </div>
+<section id="about" class="py-32 px-6 md:px-12 bg-white relative z-10 min-h-screen flex flex-col justify-center items-center">
+  <div class="max-w-6xl mx-auto text-center w-full">
+    
+    <p class="font-sans text-xs font-bold uppercase tracking-widest text-black mb-12">SOBRE MÍ</p>
+    
+    <h2 data-gsap="about-reveal" class="text-[8vw] sm:text-[6vw] md:text-[80px] lg:text-[100px] font-heading font-black leading-[0.9] text-black/20 uppercase tracking-tighter w-full">
+      INGENIERO BACKEND.<br/>
+      EXPERTO EN N8N.<br/>
+      RESOLVEDOR DE<br/>
+      PROBLEMAS DÍFICILES.
+    </h2>
 
-      <div class="reveal-about">
-        <div class="space-y-8 bento-interactive rounded-[3rem] p-10 md:p-14 border border-white/5 bg-white/[0.01]">
-          <p class="text-xl md:text-2xl text-slate-400 font-medium leading-relaxed tracking-tight">
-            {siteData.shortBio}
-          </p>
-          <ul class="space-y-6 pt-12 border-t border-white/5">
-            {focusItems.map(item => (
-              <li class="flex items-center gap-6 group">
-                <span class="w-2 h-2 bg-blue-500 rounded-full group-hover:scale-[2] transition-transform duration-500 shadow-[0_0_15px_rgba(59,130,246,0.6)]"></span>
-                <span class="text-lg md:text-xl font-black tracking-tighter uppercase text-slate-200 group-hover:pl-4 transition-all duration-500 group-hover:text-blue-400">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
+
+<style is:global>
+  [data-gsap="about-reveal"] .word {
+      background: linear-gradient(to right, #000 50%, rgba(0,0,0,0.15) 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import SplitType from 'split-type';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from('.reveal-about', {
-    y: 40,
-    opacity: 0,
-    duration: 1.5,
-    ease: 'expo.out',
-    stagger: 0.3,
-    scrollTrigger: {
-      trigger: '#about',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    }
+  document.addEventListener("DOMContentLoaded", () => {
+      const aboutText = document.querySelector('[data-gsap="about-reveal"]');
+      if (aboutText) {
+          const split = new SplitType(aboutText as HTMLElement, { types: 'words' });
+          
+          gsap.to(split.words, {
+              backgroundPosition: '0% 0',
+              ease: 'none',
+              scrollTrigger: {
+                  trigger: aboutText,
+                  start: 'top 80%',
+                  end: 'bottom 40%',
+                  scrub: 1
+              }
+          });
+      }
   });
 </script>

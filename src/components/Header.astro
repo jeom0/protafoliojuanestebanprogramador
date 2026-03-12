@@ -2,132 +2,97 @@
 import { siteData } from '../data/site';
 ---
 
-<header class="fixed top-0 left-0 w-full z-[100] transition-transform duration-500 bg-[#F2F2F2]/80 backdrop-blur-xl border-b border-black/5" id="main-header">
-  <nav class="container mx-auto px-6 lg:px-12 py-5 flex justify-between items-center" id="nav-container">
-    
-    <!-- Minimalist Typographic Logo -->
-    <a href="#inicio" class="magnetic-btn group flex items-center relative z-[110] overflow-hidden">
-        <span class="font-heading text-2xl md:text-3xl uppercase font-black text-black flex">
-            {'JUAN.'.split('').map((letter, i) => (
-                <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full" style={`transition-delay: ${i * 30}ms`}>{letter}</span>
-            ))}
-            <span class="absolute top-full left-0 flex">
-                {'JUAN.'.split('').map((letter, i) => (
-                    <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full" style={`transition-delay: ${i * 30}ms`}>{letter}</span>
-                ))}
-            </span>
-        </span>
-    </a>
+<header id="main-header" style="position:fixed;top:0;left:0;width:100%;z-index:100;padding:20px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(240,244,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);">
+  
+  <!-- Logo -->
+  <a href="#inicio" style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:900;color:#000;text-decoration:none;text-transform:uppercase;letter-spacing:-0.02em;">
+    JUAN.
+  </a>
 
-    <!-- Desktop Nav (DiegoLiv Style) -->
-    <div class="hidden md:flex items-center gap-10">
-      {[
-        { name: 'INDEX', href: '#inicio' },
-        { name: 'WORK', href: '#proyectos' },
-        { name: 'ABOUT', href: '#servicios' },
-        { name: 'CONTACT', href: '#contacto' },
-      ].map((item) => (
-        <a 
-          href={item.href} 
-          class="magnetic-btn font-sans text-xs uppercase font-bold tracking-widest text-black/60 hover:text-black transition-colors relative group overflow-hidden flex p-2"
-        >
-            <div class="relative">
-                <span class="flex">
-                    {item.name.split('').map((letter, i) => (
-                        <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full" style={`transition-delay: ${i * 20}ms`}>{letter === ' ' ? '\u00A0' : letter}</span>
-                    ))}
-                </span>
-                <span class="absolute top-full left-0 flex text-[#0066ff]">
-                    {item.name.split('').map((letter, i) => (
-                        <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full" style={`transition-delay: ${i * 20}ms`}>{letter === ' ' ? '\u00A0' : letter}</span>
-                    ))}
-                </span>
-            </div>
-        </a>
-      ))}
-    </div>
-
-    <!-- CTA Button (Desktop) -->
-    <a href="#contacto" class="magnetic-btn hidden md:flex bg-black text-white px-8 py-3 rounded-full font-sans text-xs uppercase font-bold tracking-widest hover:bg-[#0066ff] transition-all duration-300">
-        HIRE ME
-    </a>
-
-    <!-- Mobile Menu Toggle -->
-    <button id="menu-toggle" class="md:hidden relative z-[150] w-10 h-10 flex flex-col justify-center items-end gap-1.5 focus:outline-none group">
-        <span class="w-8 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:rotate-45 group-[.is-active]:translate-y-2 group-[.is-active]:w-8"></span>
-        <span class="w-6 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:opacity-0"></span>
-        <span class="w-4 h-0.5 bg-black rounded-full transition-all duration-300 group-[.is-active]:-rotate-45 group-[.is-active]:-translate-y-2 group-[.is-active]:w-8 group-[.is-active]:bg-[#0066ff]"></span>
-    </button>
+  <!-- Desktop Nav -->
+  <nav style="display:flex;align-items:center;gap:40px;" class="desktop-nav">
+    <a href="#proyectos" class="nav-link">PROJECTS</a>
+    <a href="#servicios" class="nav-link">ABOUT</a>
+    <a href="#contacto" class="nav-link hire-me-link">HIRE ME</a>
   </nav>
+
+  <!-- Mobile Toggle -->
+  <button id="mobile-toggle" style="display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;" aria-label="Menu">
+    <span class="bar" style="display:block;width:24px;height:2px;background:#000;border-radius:2px;transition:all 0.3s;"></span>
+    <span class="bar" style="display:block;width:18px;height:2px;background:#000;border-radius:2px;transition:all 0.3s;"></span>
+    <span class="bar" style="display:block;width:12px;height:2px;background:#000;border-radius:2px;transition:all 0.3s;"></span>
+  </button>
 
 </header>
 
-  <!-- Mobile Menu Drawer (Solid Light) - Moved outside header to fix CSS containing block issue -->
-  <div id="mobile-menu" class="fixed inset-0 z-[140] -translate-y-full transition-transform duration-500 flex flex-col items-center justify-center gap-6 md:hidden bg-[#F2F2F2] isolate h-[100dvh] w-full px-4">
-    
-    {[
-        { name: 'INDEX', href: '#inicio' },
-        { name: 'WORK', href: '#proyectos' },
-        { name: 'ABOUT', href: '#servicios' },
-        { name: 'CONTACT', href: '#contacto' },
-      ].map((item, index) => (
-        <a 
-          href={item.href} 
-          class="mobile-link font-heading text-4xl sm:text-5xl uppercase tracking-tighter font-black text-black hover:text-[#0066ff] transition-colors"
-          style={`transition-delay: ${index * 50}ms`}
-        >
-          {item.name}
-        </a>
-      ))}
-      
-      <a href="#contacto" class="mobile-link mt-8 px-10 py-4 bg-black text-white font-sans text-xs rounded-full uppercase tracking-widest font-bold active:scale-95 transition-all outline-none">
-        HIRE ME
-      </a>
-  </div>
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;position:fixed;inset:0;z-index:99;background:#F0F4FF;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
+  <a href="#proyectos" class="mobile-nav-link" onclick="closeMobileMenu()">PROJECTS</a>
+  <a href="#servicios" class="mobile-nav-link" onclick="closeMobileMenu()">ABOUT</a>
+  <a href="#contacto" class="mobile-nav-link" onclick="closeMobileMenu()">HIRE ME</a>
+</div>
+
+<style>
+  .nav-link {
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    color:#000;
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    transition:color 0.2s;
+  }
+  .nav-link:hover { color:#0066ff; }
+  .hire-me-link {
+    background:#000;
+    color:#fff !important;
+    padding:10px 24px;
+    border-radius:100px;
+    transition:background 0.2s, color 0.2s !important;
+  }
+  .hire-me-link:hover { background:#0066ff !important; color:#fff !important; }
+  .mobile-nav-link {
+    font-family:'Oswald',sans-serif;
+    font-size:48px;
+    font-weight:900;
+    color:#000;
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:-0.03em;
+  }
+  .mobile-nav-link:hover { color:#0066ff; }
+  @media(max-width:768px) {
+    .desktop-nav { display:none !important; }
+    #mobile-toggle { display:flex !important; }
+  }
+</style>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.getElementById('main-header');
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    
-    // Toggle Menu
-    if(menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('is-active');
-            mobileMenu?.classList.toggle('-translate-y-full');
-            document.body.classList.toggle('overflow-hidden');
-        });
-    }
+  let mobileOpen = false;
+  const header = document.getElementById('main-header');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const toggle = document.getElementById('mobile-toggle');
 
-    // Close on link click
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle?.classList.remove('is-active');
-            mobileMenu?.classList.add('-translate-y-full');
-            document.body.classList.remove('overflow-hidden');
-        });
-    });
+  function closeMobileMenu() {
+    mobileOpen = false;
+    mobileMenu.style.display = 'none';
+  }
 
-    // Smart Header Scroll (Hide on scroll down, show on scroll up)
-    let lastScrollY = window.scrollY;
-    
-    window.addEventListener('scroll', () => {
-        // Don't hide header if mobile menu is open
-        if(window.innerWidth < 768 && menuToggle?.classList.contains('is-active')) return;
-        
-        const currentScrollY = window.scrollY;
-        
-        // Scrolling DOWN & past the intro: hide header completely
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            header.style.transform = 'translateY(-110%)';
-        } 
-        // Scrolling UP or at the very top: show header exactly at 0
-        else {
-            header.style.transform = 'translateY(0)';
-        }
-        lastScrollY = currentScrollY;
-    }, { passive: true });
+  toggle?.addEventListener('click', () => {
+    mobileOpen = !mobileOpen;
+    mobileMenu.style.display = mobileOpen ? 'flex' : 'none';
   });
+
+  // Hide on scroll down, show on scroll up
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > lastY && y > 80) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+    lastY = y;
+  }, { passive: true });
 </script>

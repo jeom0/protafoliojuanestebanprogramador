@@ -2,64 +2,49 @@
 import { siteData } from '../data/site';
 ---
 
-<section id="inicio" class="relative min-h-[90vh] flex flex-col justify-center items-center pt-32 pb-20 px-4 md:px-8 overflow-hidden">
+<section id="inicio" class="relative min-h-[95vh] flex flex-col justify-center items-center pt-40 pb-0 px-4 md:px-8 bg-white overflow-hidden">
     
-    <!-- Interactive Canvas Particles -->
-    <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    <!-- Interactive Node Canvas Background -->
+    <div class="absolute inset-0 w-full h-full bg-[#f8fafc] z-0 overflow-hidden">
+        <canvas id="hero-particles" data-gsap="parallax-hero" class="w-full h-full pointer-events-none opacity-60"></canvas>
+    </div>
 
     <!-- Massive Centered Typography -->
-    <div class="w-full max-w-7xl mx-auto text-center relative z-10 flex flex-col items-center">
+    <div class="w-full max-w-6xl mx-auto text-center relative z-10 flex flex-col items-center flex-1 justify-center">
         
-        <!-- Overhead Intro -->
-        <div class="mb-8 inline-flex items-center gap-3 px-6 py-2 rounded-full border border-black/10 bg-white/50 backdrop-blur-sm shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span class="font-sans text-xs uppercase tracking-widest font-bold text-black/70">JUAN ESTEBAN OSPINA</span>
-        </div>
-
-        <!-- Huge Headline (DiegoLiv Style) -->
-        <h1 data-gsap="hero-title" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);" class="font-heading text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[140px] leading-[0.8] tracking-[-0.04em] text-black w-full break-words uppercase mix-blend-multiply opacity-0">
-            INGENIERÍA <br/>
-            <span class="text-black/30 italic pr-2">DE SOFTWARE</span> <br/>
-            DE ALTO NIVEL.
+        <!-- Huge Headline -->
+        <h1 data-gsap="hero-title" class="font-heading text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[110px] leading-[0.9] tracking-tighter text-black w-full uppercase font-black">
+            ARQUITECTURA BACKEND<br/>
+            PARA STARTUPS CONSTRUYENDO<br/>
+            EL FUTURO.
         </h1>
         
-        <p data-gsap="hero-desc" class="mt-12 max-w-2xl text-lg md:text-xl font-sans text-black/60 font-medium leading-relaxed opacity-0 translate-y-4">
-            {siteData.shortBio} Creo soluciones backend robustas y automatizaciones n8n que escalan.
-        </p>
-
-        <!-- CTA Stadium Button -->
-        <div class="mt-16 flex flex-col sm:flex-row gap-6 items-center">
-            <a href="#contacto" class="stadium-pill bg-black text-white px-10 py-5 text-sm uppercase tracking-widest font-bold font-sans hover:bg-[#0066ff] hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-black/10 flex items-center gap-3">
-                EMPEZAR PROYECTO
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
-            
-            <a href="#proyectos" class="group flex items-center gap-3 text-black font-sans text-sm font-bold uppercase tracking-widest hover:text-[#0066ff] transition-colors">
-                <div class="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center group-hover:border-[#0066ff] transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                </div>
-                VER PORTAFOLIO
-            </a>
+        <!-- Tech Logos Sub-section -->
+        <div data-gsap="hero-logos" class="w-full max-w-5xl mx-auto mt-20 md:mt-24 flex flex-wrap justify-center items-center gap-6 md:gap-12 opacity-0 -translate-y-4">
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">NODE.JS</div>
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">PYTHON</div>
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">N8N</div>
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">DOCKER</div>
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">AWS</div>
+            <div class="font-heading text-xl md:text-3xl font-black text-black/60 tracking-tighter hover:text-black transition-colors">POSTGRESQL</div>
         </div>
     </div>
 
-    <!-- Diegoliv Client Logos Sub-section -->
-    <div class="w-full max-w-7xl mx-auto mt-32 pt-16 border-t border-black/10 flex flex-col items-center">
-        <p class="font-sans text-[10px] uppercase tracking-[0.3em] text-black/40 font-bold mb-8 text-center">TECNOLOGÍAS PRINCIPALES</p>
-        <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            <!-- Simulating clean monochrome logos -->
-            <div class="font-heading text-2xl font-black text-black tracking-tighter">NODE.JS</div>
-            <div class="font-heading text-2xl font-black text-black tracking-tighter">PYTHON</div>
-            <div class="font-heading text-2xl font-black text-black tracking-tighter">N8N</div>
-            <div class="font-heading text-2xl font-black text-black tracking-tighter">DOCKER</div>
-            <div class="font-heading text-2xl font-black text-black tracking-tighter">AWS</div>
-        </div>
+    <!-- Attached Bottom Button -->
+    <div class="relative z-20 mt-20 flex justify-center w-full translate-y-1/2">
+        <a href="#contacto" class="bg-black text-white px-8 py-4 font-sans text-sm font-bold uppercase tracking-widest hover:bg-[#0066ff] transition-colors shadow-2xl relative z-30 flex items-center gap-3">
+            TRABAJAR CONMIGO
+        </a>
     </div>
+
 </section>
 
 <style is:global>
     /* Prevent FOUC on split text */
-    [data-gsap="hero-title"] .char {
+    [data-gsap="hero-title"] .line {
+        overflow: hidden;
+    }
+    [data-gsap="hero-title"] .word {
         transform: translateY(110%);
         opacity: 0;
     }
@@ -75,39 +60,41 @@ import { siteData } from '../data/site';
         if (titleElements.length === 0) return;
 
         // Reset visibility so GSAP can take over
-        gsap.set('[data-gsap="hero-title"]', { opacity: 1, clipPath: 'none' });
+        gsap.set('[data-gsap="hero-title"]', { opacity: 1 });
         
-        // Split the text into characters
-        const split = new SplitType('[data-gsap="hero-title"]', { types: 'lines, words, chars' });
-        
-        // Wrap lines in overflow-hidden for the reveal mask effect
-        split.lines.forEach(line => {
-            const wrapper = document.createElement('div');
-            wrapper.style.overflow = 'hidden';
-            wrapper.style.display = 'inline-block';
-            wrapper.style.verticalAlign = 'top';
-            line.parentNode.insertBefore(wrapper, line);
-            wrapper.appendChild(line);
-        });
+        // Split the text into lines and words
+        const split = new SplitType('[data-gsap="hero-title"]', { types: 'lines, words' });
 
         // The master timeline (Diegoliv staggered entry)
         const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-        tl.to(split.chars, {
+        tl.to(split.words, {
             y: '0%',
             opacity: 1,
             duration: 1.2,
-            stagger: 0.015,
+            stagger: 0.05,
             delay: 0.2
         })
-        .to('[data-gsap="hero-desc"]', {
+        .to('[data-gsap="hero-logos"]', {
             opacity: 1,
             y: 0,
             duration: 1,
             ease: 'power3.out'
-        }, "-=0.8");
+        }, "-=0.6");
 
-        // Interactive Canvas Particles Logic
+        // Parallax Effect for Background
+        gsap.to('[data-gsap="parallax-hero"]', {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#inicio",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Interactive Canvas Nodes Logic
         const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
         if(canvas) {
             const ctx = canvas.getContext('2d');
@@ -123,7 +110,7 @@ import { siteData } from '../data/site';
             let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
             window.addEventListener('mousemove', (e) => {
                 mouse.x = e.clientX;
-                mouse.y = e.clientY + window.scrollY; // adjust for scroll if needed
+                mouse.y = e.clientY + window.scrollY; // adjust for scroll
             });
 
             class Particle {
@@ -155,7 +142,6 @@ import { siteData } from '../data/site';
                 }
 
                 update() {
-                    // Adjust mouse position relative to scroll
                     const bounds = canvas.getBoundingClientRect();
                     const localMouseY = mouse.y - bounds.top;
 
