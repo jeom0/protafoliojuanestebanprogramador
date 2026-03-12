@@ -44,7 +44,7 @@ import { siteData } from '../data/site';
   </nav>
 
   <!-- Mobile Menu Drawer (V35 Expert) -->
-  <div id="mobile-menu" class="fixed inset-0 backdrop-blur-3xl z-[105] translate-x-full transition-transform duration-700 flex flex-col items-center justify-center gap-10 md:hidden bg-[#03060b]/98">
+  <div id="mobile-menu" class="fixed inset-0 backdrop-blur-3xl z-[105] translate-x-full transition-transform duration-500 flex flex-col items-center justify-center gap-10 md:hidden bg-[#03060b]/98">
     
     {[
         { name: 'Inicio', href: '#inicio' },
@@ -55,20 +55,21 @@ import { siteData } from '../data/site';
       ].map((item) => (
         <a 
           href={item.href} 
-          class="mobile-link font-heading text-5xl uppercase tracking-tighter font-black transition-all duration-500 text-slate-500 hover:text-blue-500 active:scale-90"
+          class="mobile-link font-heading text-4xl sm:text-5xl uppercase tracking-tighter font-black transition-all duration-300 text-slate-500 hover:text-blue-500 active:scale-90"
         >
           {item.name}
         </a>
       ))}
       
-      <a href="#contacto" class="mt-8 px-12 py-5 text-white font-mono text-[11px] rounded-2xl uppercase tracking-[0.2em] font-black active:scale-95 transition-all bg-blue-600 shadow-[0_20px_40px_-10px_rgba(59,130,246,0.4)]">
+      <a href="#contacto" class="mobile-link mt-8 px-12 py-5 text-white font-mono text-[11px] rounded-2xl uppercase tracking-[0.2em] font-black active:scale-95 transition-all bg-blue-600 shadow-[0_20px_40px_-10px_rgba(59,130,246,0.4)]">
         INICIAR_PROYECTO
       </a>
   </div>
 </header>
 
 
-<script>
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
     const header = document.getElementById('main-header');
     const nav = document.getElementById('nav-container');
     const menuToggle = document.getElementById('menu-toggle');
@@ -76,11 +77,17 @@ import { siteData } from '../data/site';
     const mobileLinks = document.querySelectorAll('.mobile-link');
     
     // Toggle Menu
-    menuToggle?.addEventListener('click', () => {
-        menuToggle.classList.toggle('is-active');
-        mobileMenu?.classList.toggle('translate-x-full');
-        document.body.classList.toggle('overflow-hidden');
-    });
+    if(menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('is-active');
+            mobileMenu?.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+            // Check if hidden to reset scroll
+            if(mobileMenu?.classList.contains('translate-x-full')) {
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+    }
 
     // Close on link click
     mobileLinks.forEach(link => {
@@ -97,26 +104,34 @@ import { siteData } from '../data/site';
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 if (window.scrollY > 30) {
-                    // Dark glass navbar on scroll (V35 Premium Glass)
-                    header.style.background = 'rgba(3, 6, 11, 0.7)';
-                    header.style.backdropFilter = 'blur(40px) saturate(200%)';
-                    header.style.webkitBackdropFilter = 'blur(40px) saturate(200%)';
-                    header.style.borderBottomColor = 'rgba(255,255,255,0.05)';
-                    header.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.6)';
-                    nav?.classList.remove('py-6');
-                    nav?.classList.add('py-4');
+                    if(header) {
+                        header.style.background = 'rgba(3, 6, 11, 0.7)';
+                        header.style.backdropFilter = 'blur(40px) saturate(200%)';
+                        header.style.webkitBackdropFilter = 'blur(40px) saturate(200%)';
+                        header.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+                        header.style.boxShadow = '0 10px 40px -10px rgba(0,0,0,0.6)';
+                    }
+                    if(nav) {
+                        nav.classList.remove('py-6');
+                        nav.classList.add('py-4');
+                    }
                 } else {
-                    header.style.background = 'transparent';
-                    header.style.backdropFilter = 'none';
-                    header.style.webkitBackdropFilter = 'none';
-                    header.style.borderBottomColor = 'transparent';
-                    header.style.boxShadow = 'none';
-                    nav?.classList.remove('py-4');
-                    nav?.classList.add('py-6');
+                    if(header) {
+                        header.style.background = 'transparent';
+                        header.style.backdropFilter = 'none';
+                        header.style.webkitBackdropFilter = 'none';
+                        header.style.borderBottomColor = 'transparent';
+                        header.style.boxShadow = 'none';
+                    }
+                    if(nav) {
+                        nav.classList.remove('py-4');
+                        nav.classList.add('py-6');
+                    }
                 }
                 ticking = false;
             });
             ticking = true;
         }
     }, { passive: true });
+  });
 </script>
