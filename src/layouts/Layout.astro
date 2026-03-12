@@ -121,8 +121,9 @@ const {
         const ctx = canvas.getContext('2d');
         
         let W, H, particles = [];
-        const NUM = 80;
-        const CONN_DIST = 160;
+        const IS_MOBILE = window.innerWidth < 768;
+        const NUM = IS_MOBILE ? 20 : 60; // Heavy reduction for performance
+        const CONN_DIST = IS_MOBILE ? 80 : 150;
         const MOUSE_DIST = 150;
         let mouse = { x: -1000, y: -1000 };
         
@@ -133,10 +134,12 @@ const {
           H = canvas.height = window.innerHeight;
         }
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        }, { passive: true });
+        if (!IS_MOBILE) {
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            }, { passive: true });
+        }
 
         function Particle() {
           this.x = Math.random() * W;
@@ -200,14 +203,16 @@ const {
           H = canvas.height = window.innerHeight;
         }
 
-        let lastWidth = window.innerWidth;
+        let resizeTimeout;
         window.addEventListener('resize', () => { 
-            resize(); 
-            // Only re-init particles if the WIDTH changes (prevents mobile scroll glitch)
-            if (window.innerWidth !== lastWidth) {
-                init();
-                lastWidth = window.innerWidth;
-            }
+            if(resizeTimeout) clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                resize(); 
+                if (window.innerWidth !== lastWidth) {
+                    init();
+                    lastWidth = window.innerWidth;
+                }
+            }, 250);
         }, { passive: true });
         
         resize();
@@ -262,10 +267,11 @@ const {
           }, { root: null, rootMargin: '100px', threshold: 0.01 });
           document.querySelectorAll('.reveal-on-scroll').forEach((el) => { observer.observe(el); });
 
-          // --- 3. GLOBAL BENTO 3D MOUSE TRACKING ---
+          // --- 3. GLOBAL BENTO 3D MOUSE TRACKING (DESKTOP ONLY) ---
           const bentoCards = document.querySelectorAll('.bento-interactive');
           let rafId = null;
-          if (bentoCards.length > 0) {
+          // Only enable 3D tilt on devices with a mouse and larger screens
+          if (bentoCards.length > 0 && window.innerWidth > 768 && window.matchMedia("(hover: hover)").matches) {
               document.addEventListener('mousemove', (e) => {
                   if (rafId) { window.cancelAnimationFrame(rafId); }
                   rafId = window.requestAnimationFrame(() => {
@@ -294,8 +300,11 @@ const {
       /** V30 High-Performance Parallax Logic **/
       let lastKnownScrollPosition = 0;
       let ticking = false;
+      const IS_MOBILE_PARALLAX = window.innerWidth < 768;
 
       function updateParallax(scrollPos) {
+          if (IS_MOBILE_PARALLAX) return; // Disable heavy parallax on mobile
+
           const layer0 = document.getElementById('parallax-layer-0');
           const layer1 = document.getElementById('parallax-layer-1');
           const layer2 = document.getElementById('parallax-layer-2');
@@ -426,19 +435,20 @@ const {
         animation-delay: 4s;
       }
 
-      /* DARK GLASSMORPHISM BENTO CARDS (MORE VISIBLE) */
+      /* DARK GLASSMORPHISM BENTO CARDS (HIGH PERFORMANCE) */
       .bento-interactive {
           will-change: transform, opacity;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
           cursor: default;
-          background: rgba(255,255,255,0.04);
+          background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.08);
-          backdrop-filter: blur(60px) saturate(200%);
-          -webkit-backdrop-filter: blur(60px) saturate(200%);
+          /* REDUCED BLUR FOR HUGE PERFORMANCE GAIN */
+          backdrop-filter: blur(20px) saturate(150%);
+          -webkit-backdrop-filter: blur(20px) saturate(150%);
+          transform: translateZ(0); /* Hardware acceleration */
           box-shadow: 
-            0 20px 50px -10px rgba(0,0,0,0.6),
-            inset 0 1px 1px rgba(255,255,255,0.15),
-            inset 0 -1px 20px rgba(0,0,0,0.1);
+            0 10px 30px -10px rgba(0,0,0,0.5),
+            inset 0 1px 1px rgba(255,255,255,0.1);
           overflow: hidden;
       }
 
@@ -450,15 +460,17 @@ const {
           cursor: pointer;
       }
 
-      .bento-interactive:hover {
-          transform: perspective(1000px) rotateX(var(--rotX, 0deg)) rotateY(var(--rotY, 0deg)) scale(1.01) translateY(-8px) !important;
-          z-index: 50;
-          border-color: rgba(59,130,246,0.25);
-          box-shadow: 
-            0 0 0 1px rgba(59,130,246,0.15),
-            0 40px 80px -20px rgba(59,130,246,0.2),
-            0 20px 40px -10px rgba(0,0,0,0.4),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+      /* Hover effect optimized */
+      @media (hover: hover) and (pointer: fine) {
+          .bento-interactive:hover {
+              transform: perspective(1000px) rotateX(var(--rotX, 0deg)) rotateY(var(--rotY, 0deg)) scale(1.01) translateY(-4px) translateZ(0) !important;
+              z-index: 50;
+              border-color: rgba(59,130,246,0.3);
+              box-shadow: 
+                0 0 0 1px rgba(59,130,246,0.2),
+                0 20px 40px -10px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+          }
       }
 
       .animate-float {
