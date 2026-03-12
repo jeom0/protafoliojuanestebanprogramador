@@ -1,83 +1,52 @@
 ---
 const services = [
-  {
-    icon: "LX_01",
-    title: "Desarrollo Backend (Laravel)",
-    desc: "Creación de sistemas robustos, escalables y seguros utilizando Laravel. APIs RESTful, integraciones de terceros y arquitecturas limpias.",
-    tag: "BACKEND"
-  },
-  {
-    icon: "NX_02",
-    title: "Sistemas en Node.js",
-    desc: "Desarrollo de microservicios y aplicaciones en tiempo real con Node.js. Alta disponibilidad y procesamiento concurrente eficiente.",
-    tag: "NODE.JS"
-  },
-  {
-    icon: "DB_03",
-    title: "Arquitectura de Datos",
-    desc: "Diseño, optimización y migración de bases de datos relacionales y NoSQL. Garantizando integridad y velocidad de consulta.",
-    tag: "DATA ENGINE"
-  },
-  {
-    icon: "AS_04",
-    title: "Asesoría de Implementación",
-    desc: "Consultoría especializada para el despliegue de software y optimización de sistemas existentes en entornos productivos.",
-    tag: "CONSULTORÍA"
-  }
+  { title: "BACKEND DEVELOPMENT", info: "Laravel & Node.js" },
+  { title: "SYSTEM ARCHITECTURE", info: "Data & Scaling" },
+  { title: "N8N AUTOMATION", info: "Workflow Design" },
+  { title: "API INTEGRATION", info: "RESTful & Webhooks" }
 ];
 ---
 
-<section id="servicios" class="py-24 bg-transparent relative overflow-hidden">
-  <div class="container mx-auto px-6 relative z-10 w-full h-full flex flex-col justify-center">
+<section id="servicios" class="py-32 relative z-10 w-full bg-[#F2F2F2]">
+  <div class="container mx-auto px-4 md:px-8 max-w-[1400px]">
     
-    <!-- HEADER (V35 Expert Overhaul) -->
-    <div class="flex flex-col justify-center items-center text-center mb-20 reveal-on-scroll">
-      <span class="px-5 py-2 rounded-full text-[10px] font-black tracking-widest uppercase mb-8 inline-block border backdrop-blur-md" style="background:rgba(59,130,246,0.1); color:#93c5fd; border-color:rgba(59,130,246,0.2);">
-          Capacidades Core
-      </span>
-      <h2 class="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-[0.85] font-black max-w-5xl pb-2 text-transparent bg-clip-text bg-gradient-to-br from-slate-100 to-slate-400 break-words">
-          SOLUCIONES <br class="sm:hidden" /> <span class="text-blue-500 italic drop-shadow-2xl">EMPRESARIALES.</span>
-      </h2>
-    </div>
-
-    <!-- SERVICES GRID (V35 Liquid Glass) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {services.map((service, index) => (
-        <div class={`group bento-interactive rounded-[2.5rem] p-10 md:p-14 flex flex-col justify-between h-[450px] animate-float reveal-on-scroll delay-${(index % 4) * 100 + 100} cursor-pointer`}
-             style={`animation-duration: ${6 + (index % 4)}s;`}
-             data-modal-title={service.title}
-             data-modal-desc={service.desc}
-             data-modal-tags={service.tag}>
-          
-          <div>
-            <div class="flex justify-between items-center mb-10">
-                <!-- Icon Badge -->
-                <div class="w-14 h-14 rounded-full flex items-center justify-center font-mono text-sm font-black border border-white/10 bg-white/5 text-slate-400 group-hover:text-blue-400 group-hover:border-blue-500/30 transition-all duration-500">
-                    {service.icon}
-                </div>
-                <span class="text-[9px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase border border-blue-500/20 bg-blue-500/10 text-blue-300 shadow-xl">
-                  {service.tag}
-                </span>
-            </div>
-            
-            <h3 class="text-3xl md:text-4xl font-black mb-6 tracking-tighter leading-tight transition-colors text-white group-hover:text-blue-400">
-                {service.title}
-            </h3>
-            
-            <p class="leading-relaxed text-lg font-medium tracking-tight text-slate-400 group-hover:text-slate-200 transition-colors">
-                {service.desc}
-            </p>
-          </div>
-
-          <!-- Bottom decoration -->
-          <div class="mt-8 flex items-center gap-6">
-              <div class="w-12 h-[1px] bg-blue-500/30 group-hover:w-20 group-hover:bg-blue-500 transition-all duration-700"></div>
-              <span class="text-[9px] font-black uppercase tracking-[0.4em] text-slate-500 group-hover:text-blue-400 transition-colors">Detalles_</span>
-          </div>
-          
+    <!-- About Paragraph (DiegoLiv Style) -->
+    <div class="mb-32 max-w-5xl">
+        <p class="font-heading text-[6vw] md:text-[5vw] leading-[0.9] text-black uppercase tracking-tighter">
+            SOY JUAN ESTEBAN OSPINA, INGENIERO DE SOFTWARE ESPECIALIZADO EN LA 
+            <span class="text-black/40 italic mix-blend-multiply">CREACIÓN DE ARQUITECTURAS BACKEND ROBUSTAS</span> 
+            Y FLUJOS DE AUTOMATIZACIÓN AVANZADOS.
+        </p>
+        <div class="mt-12 flex gap-4">
+            <span class="px-6 py-3 rounded-full border border-black/10 text-black font-sans text-xs uppercase font-bold tracking-widest bg-white">MEDELLÍN, COLOMBIA</span>
+            <span class="px-6 py-3 rounded-full border border-black/10 text-black font-sans text-xs uppercase font-bold tracking-widest bg-white">AVAILABLE FOR WORK</span>
         </div>
-      ))}
     </div>
+
+    <!-- Services List -->
+    <div class="w-full border-t border-black/10 pt-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+            <h2 class="font-heading text-5xl md:text-7xl uppercase font-black text-black tracking-tighter leading-none">
+                MIS ESPECIALIDADES.
+            </h2>
+            <p class="font-sans text-lg text-black/60 font-medium max-w-sm">
+                Soluciones técnicas enfocadas en escalabilidad, rendimiento y optimización de datos para empresas modernas.
+            </p>
+        </div>
+
+        <div class="w-full flex flex-col group/list">
+            {services.map((service) => (
+                <div class="group/item flex flex-col md:flex-row justify-between items-start md:items-center py-10 md:py-16 border-b border-black/10 transition-colors duration-500 hover:bg-white cursor-pointer px-4 -mx-4">
+                    <h3 class="font-heading text-4xl sm:text-6xl md:text-[8vw] uppercase font-black text-black tracking-tighter leading-none transition-transform duration-500 group-hover/item:translate-x-4 mix-blend-multiply group-hover/item:text-[#0066ff]">
+                        {service.title}
+                    </h3>
+                    <div class="mt-4 md:mt-0 font-sans text-sm md:text-base text-black/40 uppercase font-bold tracking-widest opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 -translate-x-4 group-hover/item:translate-x-0">
+                        {service.info}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
   </div>
 </section>
-
